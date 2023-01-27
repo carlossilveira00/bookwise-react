@@ -13,13 +13,12 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
   };
 
-  const useSignUp = () => {
-
-    console.log('Tried to sign up');
+  const signUp = (userInformation) => {
+    setUser(userInformation);
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, useSignUp }}>
+    <AuthContext.Provider value={{ user, login, logout, signUp }}>
       { children }
     </AuthContext.Provider>
   )
