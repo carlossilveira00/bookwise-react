@@ -1,11 +1,10 @@
-import SignUpForm from '../components/SignUpForm';
-import { Grid, Typography } from '@mui/material';
 import React, { useState } from 'react'
-import Image from '../backgroundImage.png'
-import LoginForm from '../components/LoginForm';
-import { useAuth } from '../context/Auth';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/Auth';
+import SignUpForm from '../components/SignUpForm';
+import Image from '../backgroundImage.png'
+import { Grid, Typography } from '@mui/material';
 
 const SignUpPage = () => {
   const [userCredentials, setUserCredentials] = useState(null);
