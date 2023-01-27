@@ -1,5 +1,6 @@
 import './App.css';
 import Navbar from './components/Navbar';
+import LoginForm from './components/LoginForm'
 import { createTheme, ThemeProvider } from '@mui/material';
 import { useState } from 'react';
 
@@ -26,6 +27,7 @@ function App() {
     <ThemeProvider theme={theme} >
       <div className="App">
         <Navbar colorMode={mode} setColorMode={setMode}/>
+        <LoginForm></LoginForm>
       </div>
     </ThemeProvider>
   );
