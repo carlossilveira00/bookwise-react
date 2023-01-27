@@ -1,10 +1,10 @@
 import React from 'react'
-import { FormGroup, Stack, TextField, Typography, FormControlLabel, Checkbox, Button } from '@mui/material';
-import { Box } from '@mui/system';
+import { FormGroup, Stack, TextField, Typography, FormControlLabel, Checkbox, Button, Box, Card } from '@mui/material';
+import '../styles/AuthCard.css';
 
 const LoginForm = ({ handleChange, handleSubmit }) => {
   return (
-    <>
+    <Card sx={{ boxShadow: 24 }}>
       <form action="" onSubmit={handleSubmit} style={{padding: '20px'}}>
         <Typography color='inherit' variant="h4" component='h4' align='left'>Login</Typography>
         <Typography variant="body2" component='p' align='left' sx={{marginBottom: '20px'}}>Hi, Welcome back 👋</Typography>
@@ -17,11 +17,11 @@ const LoginForm = ({ handleChange, handleSubmit }) => {
         </Stack>
         <Button color='primary' variant='contained' size='large' fullWidth type='submit'>Login</Button>
         <Stack direction="row" alignItems='center'>
-          <Typography variant="body1" color="initial" align='left'>Don't have an account?</Typography>
+          <Typography color='inherit' variant="body1" align='left'>Don't have an account?</Typography>
           <Button href='#' color='primary' size='large'>Sign Up</Button>
         </Stack>
       </form>
-    </>
+    </Card>
   )
 }
 

@@ -3,6 +3,7 @@ import Navbar from './components/Navbar';
 import LoginForm from './components/LoginForm'
 import { createTheme, ThemeProvider } from '@mui/material';
 import { useState } from 'react';
+import LoginPage from './pages/LoginPage';
 
 const designTheme = (colorMode) => {
   return {
@@ -25,9 +26,9 @@ function App() {
   const theme = createTheme(designTheme(mode))
   return (
     <ThemeProvider theme={theme} >
+      <Navbar colorMode={mode} setColorMode={setMode}/>
       <div className="App">
-        <Navbar colorMode={mode} setColorMode={setMode}/>
-        <LoginForm></LoginForm>
+        <LoginPage/>
       </div>
     </ThemeProvider>
   );
