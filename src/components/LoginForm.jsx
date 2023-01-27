@@ -1,11 +1,10 @@
 import React from 'react'
-import { FormGroup, Stack, TextField, Typography, FormControlLabel, Checkbox, Button, Box, Card } from '@mui/material';
-import '../styles/AuthCard.css';
+import { FormGroup, Stack, TextField, Typography, FormControlLabel, Checkbox, Button, Card } from '@mui/material';
 
 const LoginForm = ({ handleChange, handleSubmit }) => {
   return (
     <Card sx={{ boxShadow: 24 }}>
-      <form action="" onSubmit={handleSubmit} style={{padding: '20px'}}>
+      <form action="" style={{padding: '20px'}} onSubmit={handleSubmit}>
         <Typography color='inherit' variant="h4" component='h4' align='left'>Login</Typography>
         <Typography variant="body2" component='p' align='left' sx={{marginBottom: '20px'}}>Hi, Welcome back 👋</Typography>
         <Stack spacing={4}>

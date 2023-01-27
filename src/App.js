@@ -1,9 +1,11 @@
 import './App.css';
 import Navbar from './components/Navbar';
-import LoginForm from './components/LoginForm'
 import { createTheme, ThemeProvider } from '@mui/material';
 import { useState } from 'react';
 import LoginPage from './pages/LoginPage';
+import { AuthProvider } from './context/Auth';
+import {Routes, Route} from 'react-router-dom'
+import HomePage from './pages/HomePage';
 
 const designTheme = (colorMode) => {
   return {
@@ -25,12 +27,15 @@ function App() {
 
   const theme = createTheme(designTheme(mode))
   return (
-    <ThemeProvider theme={theme} >
-      <Navbar colorMode={mode} setColorMode={setMode}/>
-      <div className="App">
-        <LoginPage/>
-      </div>
-    </ThemeProvider>
+    <AuthProvider>
+      <ThemeProvider theme={theme} >
+        <Navbar colorMode={mode} setColorMode={setMode}/>
+        <Routes>
+          <Route path='/' element={<HomePage/>}></Route>
+          <Route path='login' element={<LoginPage/>}></Route>
+        </Routes>
+      </ThemeProvider>
+    </AuthProvider>
   );
 }
 
