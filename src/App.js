@@ -1,7 +1,14 @@
 import './App.css';
 import Navbar from './components/Navbar';
 import { createTheme, ThemeProvider } from '@mui/material';
+import { QueryClientProvider, QueryClient } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools'
 import { useState } from 'react';
+import LoginPage from './pages/LoginPage';
+import { AuthProvider } from './context/Auth';
+import {Routes, Route} from 'react-router-dom'
+import HomePage from './pages/HomePage';
+import SignUpPage from './pages/SignUpPage';
 
 const designTheme = (colorMode) => {
   return {
@@ -20,14 +27,23 @@ const designTheme = (colorMode) => {
 
 function App() {
   const [mode, setMode] = useState('light');
+  const queryClient = new QueryClient();
 
   const theme = createTheme(designTheme(mode))
   return (
-    <ThemeProvider theme={theme} >
-      <div className="App">
-        <Navbar colorMode={mode} setColorMode={setMode}/>
-      </div>
-    </ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <ThemeProvider theme={theme} >
+          <Navbar colorMode={mode} setColorMode={setMode}/>
+          <Routes>
+            <Route path='/' element={<HomePage/>} />
+            <Route path='login' element={<LoginPage/>} />
+            <Route path='signup' element={<SignUpPage/>} />
+          </Routes>
+        </ThemeProvider>
+      </AuthProvider>
+      <ReactQueryDevtools initialIsOpen={false}/>
+    </QueryClientProvider>
   );
 }
 
