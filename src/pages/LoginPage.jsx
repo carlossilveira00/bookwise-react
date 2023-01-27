@@ -4,19 +4,23 @@ import Image from '../backgroundImage.png'
 import LoginForm from '../components/LoginForm';
 import { useAuth } from '../context/Auth';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
   const [userCredentials, setUserCredentials] = useState(null);
   const auth = useAuth();
+  const navigate = useNavigate();
 
   const handleSubmit = ( event ) => {
-    event.preventDefault()
+    event.preventDefault();
+
     axios.post('http://localhost:3000/users/sign_in', {user: userCredentials})
     .then(data => {
       auth.login({
         "user": data.data.status.data,
         "userToken" : data.headers.authorization
-      })
+      });
+      navigate('/', {replace: true})
     })
   };
 

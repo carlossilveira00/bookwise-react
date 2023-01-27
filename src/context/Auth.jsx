@@ -1,6 +1,4 @@
-import axios from 'axios';
 import {useState, useContext, createContext } from 'react';
-import { useQuery } from 'react-query';
 
 const AuthContext = createContext(null);
 
@@ -11,16 +9,17 @@ export const AuthProvider = ({ children }) => {
     setUser(userInformation)
   };
 
-  const useLogout = () => {
-    console.log( 'Signed Out!' )
+  const logout = () => {
+    setUser(null);
   };
 
   const useSignUp = () => {
+
     console.log('Tried to sign up');
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, useLogout, useSignUp }}>
+    <AuthContext.Provider value={{ user, login, logout, useSignUp }}>
       { children }
     </AuthContext.Provider>
   )
