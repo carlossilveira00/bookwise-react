@@ -13,6 +13,14 @@ const Navbar = ({colorMode, setColorMode}) => {
   const handleColorModeChange = () => {
     colorMode === 'light' ? setColorMode('dark') : setColorMode('light')
   };
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   // Conditional Render the menu for the user depending if the user exists or not.
   if ( auth.user == null) {
@@ -25,9 +33,27 @@ const Navbar = ({colorMode, setColorMode}) => {
   } else {
     menu = (
       <>
-        <Button variant="text" color="primary">
+        <Button variant="text" color="primary" id="basic-button"
+        aria-controls={open ? 'basic-menu' : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? 'true' : undefined}
+        onClick={handleClick}
+        >
           <MenuIcon></MenuIcon>
         </Button>
+        <Menu
+        id="basic-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        MenuListProps={{
+          'aria-labelledby': 'basic-button',
+        }}
+      >
+        <MenuItem onClick={handleClose}>Profile</MenuItem>
+        <MenuItem onClick={handleClose}>My account</MenuItem>
+        <MenuItem onClick={handleClose}>Logout</MenuItem>
+      </Menu>
       </>
     )
   }
