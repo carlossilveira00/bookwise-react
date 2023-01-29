@@ -1,4 +1,6 @@
 import BookCard from "../components/BookCard";
+import Grid from '@mui/material/Grid'
+
 
 
 const HomePage = () => {
@@ -6,7 +8,7 @@ const HomePage = () => {
 
   return (
     <div>
-      <BookCard/>
+      <BookCard></BookCard>
     </div>
   )
 }
