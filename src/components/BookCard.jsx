@@ -1,10 +1,16 @@
-import { Box, Button, Paper, Rating, Stack, Typography, Modal } from '@mui/material';
+import { Box, Button, Paper, Rating, Stack, Typography} from '@mui/material';
 import { useState } from 'react';
 import Image from '../backgroundImage.png'
+import BookModal from './BookModal';
 
-const BookCard = () => {
+const BookCard = ({title}) => {
+  // Set State to track if the modal is open or not.
   const [open, setOpen] = useState(false);
+
+  // Function to Open the modal setting the state of open to true.
   const handleOpen = () => setOpen(true);
+
+  // Function to Close the modal setting the state of open to false.
   const handleClose = () => setOpen(false);
 
   return (
@@ -34,21 +40,11 @@ const BookCard = () => {
           </Stack>
         </Paper>
       </Button>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box>
-              <Typography id="modal-modal-title" variant="h6" component="h2">
-                Text in a modal
-              </Typography>
-              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-              </Typography>
-            </Box>
-      </Modal>
+      <BookModal
+      open={open}
+      handleClose={handleClose}
+      title={title}
+      />
     </>
   )
 }
