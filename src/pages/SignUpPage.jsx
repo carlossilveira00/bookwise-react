@@ -40,6 +40,6 @@ const SignUpPage = () => {
         </Grid>
       </Grid>
   )
-}
+};
 
 export default SignUpPage;
