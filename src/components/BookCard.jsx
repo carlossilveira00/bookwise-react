@@ -16,14 +16,14 @@ const BookCard = ({title}) => {
   return (
     <>
       <Button onClick={handleOpen}>
-        <Paper sx={{textTransform: 'none'}}>
+        <Paper color='white' sx={{textTransform: 'none'}}>
           <Stack direction='row'>
             <img src={Image} alt="" width={"200px"} />
             <Box padding={2}>
-              <Typography variant="h6" color="initial">The Compound Effect</Typography>
-              <Typography variant="subtitle2" color="initial">By Darren Hardy</Typography>
+              <Typography variant="h6" color="inherit">The Compound Effect</Typography>
+              <Typography variant="subtitle2" color="inherit">By Darren Hardy</Typography>
               <Rating name="read-only" size='small' value={3} readOnly />
-              <Typography variant="body2" color="initial" paragraph
+              <Typography variant="body2" color="inherit" paragraph
               style={{
                 height: '70px',
                 overflow: 'scroll',
