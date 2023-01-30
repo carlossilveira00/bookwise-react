@@ -16,7 +16,7 @@ const BookCard = ({title}) => {
   return (
     <>
       <Button onClick={handleOpen}>
-        <Paper>
+        <Paper sx={{textTransform: 'none'}}>
           <Stack direction='row'>
             <img src={Image} alt="" width={"200px"} />
             <Box padding={2}>
