@@ -9,6 +9,7 @@ import { AuthProvider } from './context/Auth';
 import {Routes, Route} from 'react-router-dom'
 import HomePage from './pages/HomePage';
 import SignUpPage from './pages/SignUpPage';
+import ScopedCssBaseline from '@mui/material/ScopedCssBaseline';
 
 const designTheme = (colorMode) => {
   return {
@@ -34,12 +35,14 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <ThemeProvider theme={theme} >
+          <ScopedCssBaseline enableColorScheme>
           <Navbar colorMode={mode} setColorMode={setMode}/>
           <Routes>
             <Route path='/' element={<HomePage/>} />
             <Route path='login' element={<LoginPage/>} />
             <Route path='signup' element={<SignUpPage/>} />
           </Routes>
+          </ScopedCssBaseline>
         </ThemeProvider>
       </AuthProvider>
       <ReactQueryDevtools initialIsOpen={false}/>
