@@ -1,4 +1,4 @@
-import { AppBar, Button, Menu, Stack, ToggleButton, Toolbar, MenuItem} from '@mui/material';
+import { AppBar, Button, Menu, Stack, ToggleButton, Toolbar, MenuItem, Link} from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/Auth';
@@ -66,6 +66,9 @@ const Navbar = ({colorMode, setColorMode}) => {
         >
           <MenuItem onClick={handleClose}>Profile</MenuItem>
           <MenuItem onClick={handleClose}>My account</MenuItem>
+          <MenuItem onClick={handleClose}>
+            <Link href='create-book' underline='none' color='inherit'>Add Book</Link>
+          </MenuItem>
           <MenuItem onClick={handleLogout}>Logout</MenuItem>
           <MenuItem onClick={handleClose}>
             <ToggleButton value={colorMode} onChange={handleColorModeChange}>
