@@ -6,15 +6,18 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
   const login = ( userInformation ) => {
+    sessionStorage.setItem('userData', userInformation)
     setUser(userInformation)
   };
 
   const logout = () => {
-    setUser(null);
+    sessionStorage.setItem('userData', null)
+    setUser(null)
   };
 
   const signUp = (userInformation) => {
-    setUser(userInformation);
+    sessionStorage.setItem('userData', userInformation)
+    setUser(userInformation)
   };
 
   return (
