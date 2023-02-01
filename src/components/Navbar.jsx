@@ -35,8 +35,9 @@ const Navbar = ({colorMode, setColorMode}) => {
     navigate('/', {replace: true})
   };
 
+
   // Conditional Render the menu for the user depending if the user exists or not.
-  if ( auth.user == null) {
+  if ( auth.user == 'null') {
     menu = (
     <>
       <Button href="login" color='primary' variant='contained'>Login</Button>
