@@ -3,8 +3,30 @@ import CreateBookForm from "../components/CreateBookForm";
 import Typography from '@mui/material/Typography'
 import { Grid } from "@mui/material";
 import { Container } from "@mui/system";
+import { useState } from "react";
+import axios from "axios";
+import { useAuth } from '../context/Auth';
 
 const CreateBookPage = () => {
+  const auth = useAuth();
+  const [bookInformation, setBookInformation] = useState();
+  // axios.defaults.headers.common['Authorization'] = 'HELLO';
+  const instance = axios.create({
+    baseURL: 'http://localhost:3000',
+  })
+
+  const handleChange = (event) => {
+    event.preventDefault()
+    setBookInformation(Object.assign({}, bookInformation, {[event.target.name]: event.target.value}))
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    instance.defaults.headers.common['Authorization'] = auth.user.userToken;
+
+    instance.post('/books', bookInformation)
+    .then (data => console.log(data))
+  };
   return (
     <Container>
       <Grid container columnSpacing={15} alignItems='center' marginTop={5}>
@@ -26,7 +48,10 @@ const CreateBookPage = () => {
           </Box>
         </Grid>
         <Grid item xs={7}>
-          <CreateBookForm></CreateBookForm>
+          <CreateBookForm
+            handleSubmit={handleSubmit}
+            handleChange={handleChange}
+          />
         </Grid>
       </Grid>
     </Container>
