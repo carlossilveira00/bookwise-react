@@ -6,14 +6,13 @@ import { Container } from "@mui/system";
 import { useState } from "react";
 import axios from "axios";
 import { useAuth } from '../context/Auth';
+import { useAddBookData } from "../hooks/useBooksData";
 
 const CreateBookPage = () => {
   const auth = useAuth();
   const [bookInformation, setBookInformation] = useState();
-  // axios.defaults.headers.common['Authorization'] = 'HELLO';
-  const instance = axios.create({
-    baseURL: 'http://localhost:3000',
-  })
+
+  const { mutate } = useAddBookData();
 
   const handleChange = (event) => {
     event.preventDefault()
@@ -22,11 +21,9 @@ const CreateBookPage = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    instance.defaults.headers.common['Authorization'] = auth.user.userToken;
-
-    instance.post('/books', bookInformation)
-    .then (data => console.log(data))
+    mutate(auth.user.userToken, bookInformation)
   };
+
   return (
     <Container>
       <Grid container columnSpacing={15} alignItems='center' marginTop={5}>
