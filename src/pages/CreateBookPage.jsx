@@ -1,17 +1,15 @@
-import { Box } from "@mui/system";
+import { useState } from "react";
 import CreateBookForm from "../components/CreateBookForm";
 import Typography from '@mui/material/Typography'
+import { Box } from "@mui/system";
 import { Grid } from "@mui/material";
 import { Container } from "@mui/system";
-import { useState } from "react";
-import axios from "axios";
-import { useAuth } from '../context/Auth';
+import { useNavigate } from 'react-router-dom';
 import { useAddBookData } from "../hooks/useBooksData";
 
 const CreateBookPage = () => {
-  const auth = useAuth();
   const [bookInformation, setBookInformation] = useState();
-
+  const navigate = useNavigate();
   const { mutate } = useAddBookData();
 
   const handleChange = (event) => {
@@ -21,7 +19,8 @@ const CreateBookPage = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    mutate(auth.user.userToken, bookInformation)
+    mutate(bookInformation);
+    navigate('/', {replace: true})
   };
 
   return (
