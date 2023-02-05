@@ -37,13 +37,13 @@ function App() {
       <AuthProvider>
         <ThemeProvider theme={theme} >
           <ScopedCssBaseline enableColorScheme>
-          <Navbar colorMode={mode} setColorMode={setMode}/>
-          <Routes>
-            <Route path='/' element={<HomePage/>} />
-            <Route path='login' element={<LoginPage/>} />
-            <Route path='signup' element={<SignUpPage/>} />
-            <Route path='create-book' element={<CreateBookPage/>}/>
-          </Routes>
+            <Navbar colorMode={mode} setColorMode={setMode}/>
+            <Routes>
+              <Route path='/' element={<HomePage/>} />
+              <Route path='login' element={<LoginPage/>} />
+              <Route path='signup' element={<SignUpPage/>} />
+              <Route path='create-book' element={<CreateBookPage/>}/>
+            </Routes>
           </ScopedCssBaseline>
         </ThemeProvider>
       </AuthProvider>
