@@ -2,15 +2,29 @@ import { useState } from "react";
 import CreateBookForm from "../components/CreateBookForm";
 import Typography from '@mui/material/Typography'
 import { Box } from "@mui/system";
-import { Grid } from "@mui/material";
+import { Grid, Alert } from "@mui/material";
 import { Container } from "@mui/system";
-import { useNavigate } from 'react-router-dom';
 import { useAddBookData } from "../hooks/useBooksData";
 
 const CreateBookPage = () => {
   const [bookInformation, setBookInformation] = useState();
-  const navigate = useNavigate();
+  const [alert, setAlert] = useState(false);
   const { mutate } = useAddBookData();
+
+  // This function is passed to the mutate function to perform when the calling of the mutate function is a success.
+  const onSuccess = (data) => {
+    if (data.data.status === 'ok') {
+      setAlert({open: true, severity: 'success', message: data.data.message });
+    } else {
+      setAlert({open: true, severity: 'warning', message: data.data.message });
+    }
+  };
+
+  // This function is passed to the mutate function to perform when the calling of the mutate function is a success.
+  const onError = () => {
+    setAlert({open: true, severity: 'error', message: 'Something went wrong, please try again!' });
+  };
+
 
   const handleChange = (event) => {
     event.preventDefault()
@@ -19,12 +33,13 @@ const CreateBookPage = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    mutate(bookInformation);
-    navigate('/', {replace: true})
+    mutate(bookInformation, {onSuccess: onSuccess, onError: onError });
+    event.target.reset();
   };
 
   return (
     <Container>
+      { alert.open === true && <Alert onClose={() => {setAlert(false)}} sx={{width: '50%', mx: 'auto', marginTop: '20px'}} severity={alert.severity}>{alert.message}</Alert>}
       <Grid container columnSpacing={15} alignItems='center' marginTop={5}>
         <Grid item xs={5}>
           <Box padding={1}>
