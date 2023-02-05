@@ -20,6 +20,7 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     sessionStorage.setItem('userData', null)
     setUser(null);
+    setAlert({open: true, severity: 'warning', message: 'You successfully Logged Out!'});
   };
 
   const signUp = (userInformation) => {
