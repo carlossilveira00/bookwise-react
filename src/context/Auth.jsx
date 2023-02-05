@@ -14,7 +14,7 @@ export const AuthProvider = ({ children }) => {
   const login = ( userInformation ) => {
     sessionStorage.setItem('userData', JSON.stringify(userInformation))
     setUser(userInformation)
-    setAlert({open: true, severity: 'success', message: 'You are successfully logged in!'})
+    setAlert({open: true, severity: 'success', message: 'You are successfully Logged In!'});
   };
 
   const logout = () => {
@@ -25,6 +25,7 @@ export const AuthProvider = ({ children }) => {
   const signUp = (userInformation) => {
     sessionStorage.setItem('userData', JSON.stringify(userInformation))
     setUser(userInformation)
+    setAlert({open: true, severity: 'success', message: 'You are successfully Signed In!'});
   };
 
   return (
