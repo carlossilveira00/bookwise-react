@@ -1,7 +1,10 @@
+import { UserCard } from "../components/UserCard";
 
 const LibraryPage = () => {
   return (
-    <div>LibraryPage</div>
+    <div>
+      <UserCard></UserCard>
+    </div>
   )
 };
 
