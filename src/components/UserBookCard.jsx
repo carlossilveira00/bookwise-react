@@ -1,9 +1,10 @@
 import { Box, Button, Paper, Rating, Stack, Typography} from '@mui/material';
+import StarIcon from '@mui/icons-material/Star';
 import { useState } from 'react';
 import Image from '../backgroundImage.png'
-import BookModal from './BookModal';
+import UserBookModal from './UserBookModal';
 
-const BookCard = ({title}) => {
+const UserBookCard = ({title, userBook }) => {
   // Set State to track if the modal is open or not.
   const [open, setOpen] = useState(false);
 
@@ -18,7 +19,10 @@ const BookCard = ({title}) => {
       <Button onClick={handleOpen}>
         <Paper color='white' sx={{textTransform: 'none'}}>
           <Stack direction='row'>
-            <img src={Image} alt="" width={"200px"} style={{display: 'block'}} />
+            <Box position={'relative'}>
+              <img src={Image} alt="" width={"200px"} height={'100%'} style={{display: 'block'}} />
+              { userBook && <StarIcon color='primary' fontSize='large' sx={{position: 'absolute', right: 0, left: 0, top: 0}}></StarIcon> }
+            </Box>
             <Box padding={2}>
               <Typography variant="h6" color="inherit">The Compound Effect</Typography>
               <Typography variant="subtitle2" color="inherit">By Darren Hardy</Typography>
@@ -40,13 +44,14 @@ const BookCard = ({title}) => {
           </Stack>
         </Paper>
       </Button>
-      <BookModal
+      <UserBookModal
       open={open}
       handleClose={handleClose}
       title={title}
+      status={'In Progress'}
       />
     </>
   )
 }
 
-export default BookCard;
+export default UserBookCard;
