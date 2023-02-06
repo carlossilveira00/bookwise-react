@@ -29,7 +29,7 @@ const LibraryPage = () => {
             <AccordionDetails sx={{maxHeight: '500px', overflow: 'scroll'}}>
               <Grid container spacing={3}>
                 <Grid item xs={6}>
-                  <BookCard title={'Hey Lion'}></BookCard>
+                  <BookCard title={'Hey Lion'} userBook={true} ></BookCard>
                 </Grid>
                 <Grid item xs={6}>
                   <BookCard title={'Hey Cat'}></BookCard>
