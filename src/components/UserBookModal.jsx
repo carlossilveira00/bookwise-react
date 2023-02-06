@@ -1,4 +1,4 @@
-import { Box, Button, Typography, Modal, Stack, Rating } from '@mui/material';
+import { Box, Button, Typography, Modal, Stack, Rating, useTheme } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -8,6 +8,7 @@ import { useState } from 'react';
 
 const UserBookModal = ({open, handleClose, status}) => {
   const [bookStatus, setBookStatus] = useState(status);
+  const theme = useTheme();
 
   const handleChange = (event) => {
     setBookStatus(event.target.value);
@@ -20,10 +21,10 @@ const UserBookModal = ({open, handleClose, status}) => {
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <Box padding={3} sx={{my:'20%', width: '50%', mx: 'auto', bgcolor:'Background'}} position={'relative'}>
+      <Box padding={3} sx={{my:'20%', width: '50%', mx: 'auto', bgcolor: theme.palette.background.default}} position={'relative'}>
         <Stack direction='row'>
           <img src={Image} alt="" width={"200px"} />
-          <Box padding={5}>
+          <Box padding={5} color={theme.palette.text.primary}>
             <Typography variant="h6" color="inherit">The TITLE</Typography>
             <Typography variant="subtitle2" color="inherit">By Darren Hardy</Typography>
             <Rating name="read-only" size='small' value={3} readOnly />

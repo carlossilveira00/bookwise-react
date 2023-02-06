@@ -1,7 +1,8 @@
-import { Box, Button, Typography, Modal, Stack, Rating } from '@mui/material';
+import { Box, Button, Typography, Modal, Stack, Rating, useTheme } from '@mui/material';
 import Image from '../backgroundImage.png'
 
 const BookModal = ({open, handleClose, title}) => {
+  const theme = useTheme();
   return (
     <Modal
       open={open}
@@ -9,10 +10,10 @@ const BookModal = ({open, handleClose, title}) => {
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <Box padding={3} sx={{my:'20%', width: '50%', mx: 'auto', bgcolor:'Background'}}>
+      <Box padding={3} sx={{my:'20%', width: '50%', mx: 'auto', bgcolor: theme.palette.background.default}}>
       <Stack direction='row'>
             <img src={Image} alt="" width={"200px"} />
-            <Box padding={5}>
+            <Box padding={5} color={theme.palette.text.primary}>
               <Typography variant="h6" color="inherit">The Compound Effect</Typography>
               <Typography variant="subtitle2" color="inherit">By Darren Hardy</Typography>
               <Rating name="read-only" size='small' value={3} readOnly />
