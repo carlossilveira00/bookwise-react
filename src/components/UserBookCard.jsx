@@ -2,7 +2,7 @@ import { Box, Button, Paper, Rating, Stack, Typography} from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
 import { useState } from 'react';
 import Image from '../backgroundImage.png'
-import BookModal from './BookModal';
+import UserBookModal from './UserBookModal';
 
 const UserBookCard = ({title, userBook }) => {
   // Set State to track if the modal is open or not.
@@ -44,10 +44,11 @@ const UserBookCard = ({title, userBook }) => {
           </Stack>
         </Paper>
       </Button>
-      <BookModal
+      <UserBookModal
       open={open}
       handleClose={handleClose}
       title={title}
+      status={'In Progress'}
       />
     </>
   )
