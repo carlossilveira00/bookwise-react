@@ -11,6 +11,7 @@ import HomePage from './pages/HomePage';
 import SignUpPage from './pages/SignUpPage';
 import ScopedCssBaseline from '@mui/material/ScopedCssBaseline';
 import CreateBookPage from './pages/CreateBookPage';
+import LibraryPage from './pages/LibraryPage';
 
 const designTheme = (colorMode) => {
   return {
@@ -43,6 +44,7 @@ function App() {
               <Route path='login' element={<LoginPage/>} />
               <Route path='signup' element={<SignUpPage/>} />
               <Route path='create-book' element={<CreateBookPage/>}/>
+              <Route path='my-library' element={<LibraryPage/>}/>
             </Routes>
           </ScopedCssBaseline>
         </ThemeProvider>
