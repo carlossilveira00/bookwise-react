@@ -4,7 +4,7 @@ import React from 'react'
 
 export const UserCard = () => {
   return (
-    <Paper sx={{border: '1px solid red', width: '30%', padding: 2}}>
+    <Paper elevation={5} sx={{width: '25%', padding: 2, minHeight: '300px'}}>
       <Avatar
         alt='User Avatar'
         src='https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8QXZhdGFyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60'
