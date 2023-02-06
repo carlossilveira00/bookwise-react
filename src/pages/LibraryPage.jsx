@@ -7,6 +7,7 @@ import ExpandMore from '@mui/icons-material/ExpandMore'
 import { Box, Container, Grid, Stack } from "@mui/material";
 import BookCard from "../components/BookCard";
 import { maxWidth } from "@mui/system";
+import UserBookCard from "../components/UserBookCard";
 
 const LibraryPage = () => {
   return (
@@ -29,7 +30,7 @@ const LibraryPage = () => {
             <AccordionDetails sx={{maxHeight: '500px', overflow: 'scroll'}}>
               <Grid container spacing={3}>
                 <Grid item xs={6}>
-                  <BookCard title={'Hey Lion'} userBook={true} ></BookCard>
+                  <UserBookCard userBook={true}></UserBookCard>
                 </Grid>
                 <Grid item xs={6}>
                   <BookCard title={'Hey Cat'}></BookCard>
@@ -56,7 +57,7 @@ const LibraryPage = () => {
             <AccordionDetails sx={{maxHeight: '500px', overflow: 'scroll'}}>
               <Grid container spacing={3}>
                 <Grid item xs={6}>
-                  <BookCard title={'Hey Lion'}></BookCard>
+                  <UserBookCard userBook={true}></UserBookCard>
                 </Grid>
                 <Grid item xs={6}>
                   <BookCard title={'Hey Cat'}></BookCard>
