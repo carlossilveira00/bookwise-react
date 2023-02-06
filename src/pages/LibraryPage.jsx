@@ -4,9 +4,8 @@ import AccordionSummary from '@mui/material/AccordionSummary'
 import AccordionDetails from '@mui/material/AccordionDetails'
 import Typography from '@mui/material/Typography'
 import ExpandMore from '@mui/icons-material/ExpandMore'
-import { Box, Container, Grid, Stack } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import BookCard from "../components/BookCard";
-import { maxWidth } from "@mui/system";
 import UserBookCard from "../components/UserBookCard";
 
 const LibraryPage = () => {
@@ -33,13 +32,13 @@ const LibraryPage = () => {
                   <UserBookCard userBook={true}></UserBookCard>
                 </Grid>
                 <Grid item xs={6}>
-                  <BookCard title={'Hey Cat'}></BookCard>
+                  <UserBookCard userBook={true}></UserBookCard>
                 </Grid>
                 <Grid item xs={6}>
-                  <BookCard title={'Hey John'}></BookCard>
+                  <UserBookCard userBook={true}></UserBookCard>
                 </Grid>
                 <Grid item xs={6}>
-                  <BookCard title={'Hey Joe'}></BookCard>
+                  <UserBookCard userBook={true}></UserBookCard>
                 </Grid>
               </Grid>
             </AccordionDetails>
@@ -60,25 +59,25 @@ const LibraryPage = () => {
                   <UserBookCard userBook={true}></UserBookCard>
                 </Grid>
                 <Grid item xs={6}>
-                  <BookCard title={'Hey Cat'}></BookCard>
+                  <UserBookCard userBook={true}></UserBookCard>
                 </Grid>
                 <Grid item xs={6}>
-                  <BookCard title={'Hey John'}></BookCard>
+                  <UserBookCard userBook={true}></UserBookCard>
                 </Grid>
                 <Grid item xs={6}>
-                  <BookCard title={'Hey Joe'}></BookCard>
+                  <UserBookCard userBook={true}></UserBookCard>
                 </Grid>
                 <Grid item xs={6}>
-                  <BookCard title={'Hey Joe'}></BookCard>
+                  <UserBookCard userBook={true}></UserBookCard>
                 </Grid>
                 <Grid item xs={6}>
-                  <BookCard title={'Hey Joe'}></BookCard>
+                  <UserBookCard userBook={true}></UserBookCard>
                 </Grid>
                 <Grid item xs={6}>
-                  <BookCard title={'Hey Joe'}></BookCard>
+                  <UserBookCard userBook={true}></UserBookCard>
                 </Grid>
                 <Grid item xs={6}>
-                  <BookCard title={'Hey Joe'}></BookCard>
+                  <UserBookCard userBook={true}></UserBookCard>
                 </Grid>
               </Grid>
             </AccordionDetails>
