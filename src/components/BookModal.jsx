@@ -35,25 +35,25 @@ const BookModal = ({open, handleClose, title}) => {
       aria-describedby="modal-modal-description"
     >
       <Box padding={3} sx={{my:'20%', width: '50%', mx: 'auto', bgcolor: theme.palette.background.default}}>
-      { alert.open === true && <Alert onClose={() => {setAlert(false)}} sx={{width: '50%',position: 'absolute', top: 10}} severity={alert.severity}>{alert.message}</Alert>}
-      <Stack direction='row'>
-            <img src={Image} alt="" width={"200px"} />
-            <Box padding={5} color={theme.palette.text.primary}>
-              <Typography variant="h6" color="inherit">The Compound Effect</Typography>
-              <Typography variant="subtitle2" color="inherit">By Darren Hardy</Typography>
-              <Rating name="read-only" size='small' value={3} readOnly />
-              <Typography variant="body2" color="inherit" paragraph>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit,
-                quam beatae rerum inventore consectetur,
-                neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
-              </Typography>
-              <Stack direction={'row'} spacing={1}>
-                <Button color='secondary' variant='contained'>Buy Now!</Button>
-                <Button onClick={handleAddBook} color='primary' variant='contained'>Add to Whishlist!</Button>
-              </Stack>
-            </Box>
-          </Stack>
+        { alert.open === true && <Alert onClose={() => {setAlert(false)}} sx={{width: '50%',position: 'absolute', top: 10}} severity={alert.severity}>{alert.message}</Alert>}
+        <Stack direction='row'>
+          <img src={Image} alt="" width={"200px"} />
+          <Box padding={5} color={theme.palette.text.primary}>
+            <Typography variant="h6" color="inherit">The Compound Effect</Typography>
+            <Typography variant="subtitle2" color="inherit">By Darren Hardy</Typography>
+            <Rating name="read-only" size='small' value={3} readOnly />
+            <Typography variant="body2" color="inherit" paragraph>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit,
+              quam beatae rerum inventore consectetur,
+              neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
+            </Typography>
+            <Stack direction={'row'} spacing={1}>
+              <Button color='secondary' variant='contained'>Buy Now!</Button>
+              <Button onClick={handleAddBook} color='primary' variant='contained'>Add to Whishlist!</Button>
+            </Stack>
           </Box>
+        </Stack>
+      </Box>
     </Modal>
   )
 };

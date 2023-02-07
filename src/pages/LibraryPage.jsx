@@ -7,8 +7,24 @@ import ExpandMore from '@mui/icons-material/ExpandMore'
 import { Container, Grid } from "@mui/material";
 import BookCard from "../components/BookCard";
 import UserBookCard from "../components/UserBookCard";
+import { useFetchUserBooksData } from "../hooks/useUserBookData";
+import { useState } from "react";
+import { useAuth } from "../context/Auth";
 
 const LibraryPage = () => {
+  const [books, setBooks] = useState('');
+  const auth = useAuth();
+
+  const onSuccess = (data) => {
+    setBooks(data.data)
+  };
+
+  const onError = (data) => {
+    console.log('IT WAS A Error')
+  };
+
+  const { isLoading } = useFetchUserBooksData(auth.user.user.id, onSuccess, onError)
+
   return (
     <Container sx={{mt: 5}}>
       <Grid container spacing={4}>
