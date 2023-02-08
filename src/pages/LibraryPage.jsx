@@ -97,6 +97,7 @@ const LibraryPage = () => {
                     started_date={filteredBook.started_date}
                     ended_date={filteredBook.ended_date}
                     status={filteredBook.status}
+                    bookId={filteredBook.id}
                     userBook={true}
                     />
                   </Grid>
@@ -129,6 +130,7 @@ const LibraryPage = () => {
                     started_date={filteredBook.started_date}
                     ended_date={filteredBook.ended_date}
                     status={filteredBook.status}
+                    bookId={filteredBook.id}
                     userBook={true}
                     />
                   </Grid>

@@ -20,6 +20,12 @@ const deleteUserBook = (bookId) => {
   return axios.delete(`http://localhost:3000/user_library/${bookId}` );
 };
 
+const updateUserBookStatus = ( bookInformation ) => {
+  axios.defaults.headers.common['Authorization'] = sessionStorage.getItem('userData');
+  console.log(bookInformation)
+  return axios.patch(`http://localhost:3000/user_library/${bookInformation.book_id}`, bookInformation );
+}
+
 export const useAddUserBookData = () => {
   return useMutation(addUserBook);
 };
@@ -33,4 +39,8 @@ export const useFetchUserBooksData = (onSuccess, onError) => {
 
 export const useDestroyUserBookData = () => {
   return useMutation(deleteUserBook);
+};
+
+export const useUpdateUserBookStatus = () => {
+  return useMutation(updateUserBookStatus)
 };

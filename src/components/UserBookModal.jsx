@@ -4,7 +4,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { useState } from 'react';
-import { useDestroyUserBookData } from '../hooks/useUserBookData';
+import { useDestroyUserBookData, useUpdateUserBookStatus } from '../hooks/useUserBookData';
 
 const UserBookModal = ({open, handleClose, title, author, description, category, thumbnail_url, started_date, ended_date, status, bookId}) => {
   const [bookStatus, setBookStatus] = useState(status);
@@ -12,9 +12,18 @@ const UserBookModal = ({open, handleClose, title, author, description, category,
   const theme = useTheme();
 
   const { mutate : removeUserBook } = useDestroyUserBookData();
+  const { mutate: updateUserBookStatus } = useUpdateUserBookStatus();
 
   const handleChange = (event) => {
     setBookStatus(event.target.value);
+  };
+
+  const handleRemoveUserBook = () => {
+    removeUserBook(bookId, {onSuccess: onSuccess, onError: onError });
+  };
+
+  const handleUpdateStatus = () => {
+    updateUserBookStatus({status: bookStatus, book_id: bookId}, {onSuccess: onSuccess, onError: onError });
   };
 
   const onSuccess = () => {
@@ -24,10 +33,6 @@ const UserBookModal = ({open, handleClose, title, author, description, category,
   const onError = () => {
     setAlert({open: true, severity: 'error', message: 'Something went wrong, please try again!' });
   };
-
-  const handleRemoveUserBook = () => {
-    removeUserBook(bookId, {onSuccess: onSuccess, onError: onError });
-  }
 
   return (
     <Modal
@@ -48,7 +53,7 @@ const UserBookModal = ({open, handleClose, title, author, description, category,
             </Typography>
             <Stack direction={'row'} spacing={1}>
               <Button onClick={handleRemoveUserBook} color='secondary' variant='contained'>Remove from Library</Button>
-              <Button href="login" color='primary' variant='contained'>Move to {bookStatus}!</Button>
+              <Button onClick={handleUpdateStatus} color='primary' variant='contained'>Move to {bookStatus}!</Button>
             </Stack>
             <Box mt={5} sx={{position: 'absolute', right: 0, top: -20, marginRight: 2}}>
               <FormControl fullWidth>
