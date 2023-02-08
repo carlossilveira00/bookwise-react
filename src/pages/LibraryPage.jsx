@@ -4,29 +4,37 @@ import AccordionSummary from '@mui/material/AccordionSummary'
 import AccordionDetails from '@mui/material/AccordionDetails'
 import Typography from '@mui/material/Typography'
 import ExpandMore from '@mui/icons-material/ExpandMore'
-import { Container, Grid } from "@mui/material";
-import BookCard from "../components/BookCard";
+import { Alert, CircularProgress, Container, Grid } from "@mui/material";
 import UserBookCard from "../components/UserBookCard";
 import { useFetchUserBooksData } from "../hooks/useUserBookData";
 import { useState } from "react";
-import { useAuth } from "../context/Auth";
+import { Box } from "@mui/system";
 
 const LibraryPage = () => {
   const [books, setBooks] = useState('');
-  const auth = useAuth();
+  const [alert, setAlert] = useState(false);
 
   const onSuccess = (data) => {
     setBooks(data.data)
   };
 
   const onError = (data) => {
-    console.log('IT WAS A Error')
+    setAlert({open: true, severity: 'error', message: 'Something went wrong, please try again!' });
   };
 
-  const { isLoading } = useFetchUserBooksData(auth.user.user.id, onSuccess, onError)
+  const { isLoading } = useFetchUserBooksData(onSuccess, onError);
+
+  if (isLoading){
+    return(
+      <Box display={'flex'} justifyContent={'center'} alignItems={'center'} height={'100vh'}>
+        <CircularProgress sx={{mx: 'auto'}}></CircularProgress>
+      </Box>
+    )
+  }
 
   return (
     <Container sx={{mt: 5}}>
+      { alert.open === true && <Alert onClose={() => {setAlert(false)}} sx={{width: '75%', mx: 'auto', marginTop: '20px', marginBottom: '20px'}} severity={alert.severity}>{alert.message}</Alert>}
       <Grid container spacing={4}>
         <Grid item xs={3}>
           <UserCard></UserCard>
@@ -44,18 +52,24 @@ const LibraryPage = () => {
             </AccordionSummary>
             <AccordionDetails sx={{maxHeight: '500px', overflow: 'scroll'}}>
               <Grid container spacing={3}>
-                <Grid item xs={6}>
-                  <UserBookCard userBook={true}></UserBookCard>
-                </Grid>
-                <Grid item xs={6}>
-                  <UserBookCard userBook={true}></UserBookCard>
-                </Grid>
-                <Grid item xs={6}>
-                  <UserBookCard userBook={true}></UserBookCard>
-                </Grid>
-                <Grid item xs={6}>
-                  <UserBookCard userBook={true}></UserBookCard>
-                </Grid>
+                {books.filter(book => book.status === 'Wishlist').map( filteredBook =>(
+                  <Grid item xs={6} key={filteredBook.id} >
+                    <UserBookCard
+                    key={filteredBook.id}
+                    title={filteredBook.book.title}
+                    author={filteredBook.book.author}
+                    description={filteredBook.book.description}
+                    category={filteredBook.book.category}
+                    thumbnail_url={filteredBook.book.thumbnail_url}
+                    started_date={filteredBook.started_date}
+                    ended_date={filteredBook.ended_date}
+                    status={filteredBook.status}
+                    bookId={filteredBook.id}
+                    userBook={true}
+                    />
+                  </Grid>
+                  ))
+                }
               </Grid>
             </AccordionDetails>
           </Accordion>
@@ -71,30 +85,24 @@ const LibraryPage = () => {
             </AccordionSummary>
             <AccordionDetails sx={{maxHeight: '500px', overflow: 'scroll'}}>
               <Grid container spacing={3}>
-                <Grid item xs={6}>
-                  <UserBookCard userBook={true}></UserBookCard>
-                </Grid>
-                <Grid item xs={6}>
-                  <UserBookCard userBook={true}></UserBookCard>
-                </Grid>
-                <Grid item xs={6}>
-                  <UserBookCard userBook={true}></UserBookCard>
-                </Grid>
-                <Grid item xs={6}>
-                  <UserBookCard userBook={true}></UserBookCard>
-                </Grid>
-                <Grid item xs={6}>
-                  <UserBookCard userBook={true}></UserBookCard>
-                </Grid>
-                <Grid item xs={6}>
-                  <UserBookCard userBook={true}></UserBookCard>
-                </Grid>
-                <Grid item xs={6}>
-                  <UserBookCard userBook={true}></UserBookCard>
-                </Grid>
-                <Grid item xs={6}>
-                  <UserBookCard userBook={true}></UserBookCard>
-                </Grid>
+                {books.filter(book => book.status === 'In Progress').map( filteredBook =>(
+                  <Grid item xs={6} key={filteredBook.id} >
+                    <UserBookCard
+                    key={filteredBook.id}
+                    title={filteredBook.book.title}
+                    author={filteredBook.book.author}
+                    description={filteredBook.book.description}
+                    category={filteredBook.book.category}
+                    thumbnail_url={filteredBook.book.thumbnail_url}
+                    started_date={filteredBook.started_date}
+                    ended_date={filteredBook.ended_date}
+                    status={filteredBook.status}
+                    bookId={filteredBook.id}
+                    userBook={true}
+                    />
+                  </Grid>
+                  ))
+                }
               </Grid>
             </AccordionDetails>
           </Accordion>
@@ -110,18 +118,24 @@ const LibraryPage = () => {
             </AccordionSummary>
             <AccordionDetails sx={{maxHeight: '500px', overflow: 'scroll'}}>
               <Grid container spacing={3}>
-                <Grid item xs={6}>
-                  <BookCard title={'Hey Lion'}></BookCard>
-                </Grid>
-                <Grid item xs={6}>
-                  <BookCard title={'Hey Cat'}></BookCard>
-                </Grid>
-                <Grid item xs={6}>
-                  <BookCard title={'Hey John'}></BookCard>
-                </Grid>
-                <Grid item xs={6}>
-                  <BookCard title={'Hey Joe'}></BookCard>
-                </Grid>
+                {books.filter(book => book.status === 'Completed').map( filteredBook =>(
+                  <Grid item xs={6} key={filteredBook.id} >
+                    <UserBookCard
+                    key={filteredBook.id}
+                    title={filteredBook.book.title}
+                    author={filteredBook.book.author}
+                    description={filteredBook.book.description}
+                    category={filteredBook.book.category}
+                    thumbnail_url={filteredBook.book.thumbnail_url}
+                    started_date={filteredBook.started_date}
+                    ended_date={filteredBook.ended_date}
+                    status={filteredBook.status}
+                    bookId={filteredBook.id}
+                    userBook={true}
+                    />
+                  </Grid>
+                  ))
+                }
               </Grid>
             </AccordionDetails>
           </Accordion>
