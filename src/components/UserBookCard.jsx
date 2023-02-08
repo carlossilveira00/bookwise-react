@@ -19,7 +19,7 @@ const UserBookCard = ({ userBook, title, author, description, category, thumbnai
         <Paper color='white' sx={{textTransform: 'none'}}>
           <Stack direction='row'>
             <Box position={'relative'}>
-              <img src={ thumbnail_url } alt="" width={"200px"} height={'100%'} style={{display: 'block'}} />
+              <img src={ thumbnail_url } alt="" width={"200px"} style={{display: 'block', maxHeight: '270px'}} />
               { userBook && <StarIcon color='primary' fontSize='large' sx={{position: 'absolute', right: 0, left: 0, top: 0}}></StarIcon> }
             </Box>
             <Box padding={2}>

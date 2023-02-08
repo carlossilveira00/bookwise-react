@@ -71,6 +71,10 @@ const UserBookModal = ({open, handleClose, title, author, description, category,
                 </Select>
               </FormControl>
             </Box>
+            <Stack direction={'row'} alignItems={'center'} justifyContent={'space-evenly'} mt={2}>
+              <Typography variant="overline" color="inherit">Started date: <strong>{started_date || '--'}</strong></Typography>
+              <Typography variant="overline" color="inherit">Ended date: <strong>{ended_date || '---'}</strong></Typography>
+            </Stack>
           </Box>
         </Stack>
         { alert.open === true && <Alert onClose={() => {setAlert(false)}} sx={{width: '95%', marginTop: 4}} severity={alert.severity}>{alert.message}</Alert>}
