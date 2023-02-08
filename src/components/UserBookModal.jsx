@@ -4,14 +4,21 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { useState } from 'react';
+import { useDestroyUserBookData } from '../hooks/useUserBookData';
 
-const UserBookModal = ({open, handleClose, title, author, description, category, thumbnail_url, started_date, ended_date, status}) => {
+const UserBookModal = ({open, handleClose, title, author, description, category, thumbnail_url, started_date, ended_date, status, bookId}) => {
   const [bookStatus, setBookStatus] = useState(status);
   const theme = useTheme();
 
   const handleChange = (event) => {
     setBookStatus(event.target.value);
   };
+
+  const { mutate : removeUserBook } = useDestroyUserBookData();
+
+  const handleRemoveUserBook = () => {
+    removeUserBook(bookId);
+  }
 
   return (
     <Modal
@@ -31,7 +38,7 @@ const UserBookModal = ({open, handleClose, title, author, description, category,
               {description}
             </Typography>
             <Stack direction={'row'} spacing={1}>
-              <Button href="signup" color='secondary' variant='contained'>Remove from Library</Button>
+              <Button onClick={handleRemoveUserBook} color='secondary' variant='contained'>Remove from Library</Button>
               <Button href="login" color='primary' variant='contained'>Move to {bookStatus}!</Button>
             </Stack>
             <Box mt={5} sx={{position: 'absolute', right: 0, top: -20, marginRight: 2}}>

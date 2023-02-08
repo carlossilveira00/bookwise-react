@@ -3,7 +3,7 @@ import StarIcon from '@mui/icons-material/Star';
 import { useState } from 'react';
 import UserBookModal from './UserBookModal';
 
-const UserBookCard = ({ userBook, title, author, description, category, thumbnail_url, started_date, ended_date, status }) => {
+const UserBookCard = ({ userBook, title, author, description, category, thumbnail_url, started_date, ended_date, status, bookId }) => {
   // Set State to track if the modal is open or not.
   const [open, setOpen] = useState(false);
 
@@ -52,6 +52,7 @@ const UserBookCard = ({ userBook, title, author, description, category, thumbnai
       started_date={started_date}
       ended_date={ended_date}
       status={status}
+      bookId={bookId}
       />
     </>
   )
