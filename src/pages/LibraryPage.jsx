@@ -4,12 +4,13 @@ import AccordionSummary from '@mui/material/AccordionSummary'
 import AccordionDetails from '@mui/material/AccordionDetails'
 import Typography from '@mui/material/Typography'
 import ExpandMore from '@mui/icons-material/ExpandMore'
-import { Alert, Container, Grid } from "@mui/material";
+import { Alert, CircularProgress, Container, Grid } from "@mui/material";
 import BookCard from "../components/BookCard";
 import UserBookCard from "../components/UserBookCard";
 import { useFetchUserBooksData } from "../hooks/useUserBookData";
 import { useState } from "react";
 import { useAuth } from "../context/Auth";
+import { Box } from "@mui/system";
 
 const LibraryPage = () => {
   const [books, setBooks] = useState('');
@@ -24,6 +25,14 @@ const LibraryPage = () => {
   };
 
   const { isLoading } = useFetchUserBooksData(onSuccess, onError);
+
+  if (isLoading){
+    return(
+      <Box display={'flex'} justifyContent={'center'} alignItems={'center'} height={'100vh'}>
+        <CircularProgress sx={{mx: 'auto'}}></CircularProgress>
+      </Box>
+    )
+  }
 
   return (
     <Container sx={{mt: 5}}>
