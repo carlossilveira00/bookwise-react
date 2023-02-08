@@ -4,7 +4,7 @@ import AccordionSummary from '@mui/material/AccordionSummary'
 import AccordionDetails from '@mui/material/AccordionDetails'
 import Typography from '@mui/material/Typography'
 import ExpandMore from '@mui/icons-material/ExpandMore'
-import { Container, Grid } from "@mui/material";
+import { Alert, Container, Grid } from "@mui/material";
 import BookCard from "../components/BookCard";
 import UserBookCard from "../components/UserBookCard";
 import { useFetchUserBooksData } from "../hooks/useUserBookData";
@@ -13,20 +13,21 @@ import { useAuth } from "../context/Auth";
 
 const LibraryPage = () => {
   const [books, setBooks] = useState('');
-  const auth = useAuth();
+  const [alert, setAlert] = useState(false);
 
   const onSuccess = (data) => {
     setBooks(data.data)
   };
 
   const onError = (data) => {
-    console.log('IT WAS A Error')
+    setAlert({open: true, severity: 'error', message: 'Something went wrong, please try again!' });
   };
 
-  const { isLoading } = useFetchUserBooksData(auth.user.user.id, onSuccess, onError)
+  const { isLoading } = useFetchUserBooksData(onSuccess, onError);
 
   return (
     <Container sx={{mt: 5}}>
+      { alert.open === true && <Alert onClose={() => {setAlert(false)}} sx={{width: '75%', mx: 'auto', marginTop: '20px', marginBottom: '20px'}} severity={alert.severity}>{alert.message}</Alert>}
       <Grid container spacing={4}>
         <Grid item xs={3}>
           <UserCard></UserCard>
