@@ -1,4 +1,4 @@
-import { Box, Button, Typography, Modal, Stack, Rating, useTheme } from '@mui/material';
+import { Box, Button, Typography, Modal, Stack, Rating, useTheme, Alert } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -8,16 +8,25 @@ import { useDestroyUserBookData } from '../hooks/useUserBookData';
 
 const UserBookModal = ({open, handleClose, title, author, description, category, thumbnail_url, started_date, ended_date, status, bookId}) => {
   const [bookStatus, setBookStatus] = useState(status);
+  const [alert, setAlert] = useState(false);
   const theme = useTheme();
+
+  const { mutate : removeUserBook } = useDestroyUserBookData();
 
   const handleChange = (event) => {
     setBookStatus(event.target.value);
   };
 
-  const { mutate : removeUserBook } = useDestroyUserBookData();
+  const onSuccess = () => {
+    window.location.reload();
+  };
+
+  const onError = () => {
+    setAlert({open: true, severity: 'error', message: 'Something went wrong, please try again!' });
+  };
 
   const handleRemoveUserBook = () => {
-    removeUserBook(bookId);
+    removeUserBook(bookId, {onSuccess: onSuccess, onError: onError });
   }
 
   return (
@@ -50,7 +59,7 @@ const UserBookModal = ({open, handleClose, title, author, description, category,
                   value={bookStatus}
                   label="Status"
                   onChange={handleChange}
-                >
+                  >
                   <MenuItem value={'Wishlist'}>Wishlist</MenuItem>
                   <MenuItem value={'In Progress'}>In Progress</MenuItem>
                   <MenuItem value={'Completed'}>Completed</MenuItem>
@@ -59,6 +68,7 @@ const UserBookModal = ({open, handleClose, title, author, description, category,
             </Box>
           </Box>
         </Stack>
+        { alert.open === true && <Alert onClose={() => {setAlert(false)}} sx={{width: '95%', marginTop: 4}} severity={alert.severity}>{alert.message}</Alert>}
       </Box>
     </Modal>
   )
