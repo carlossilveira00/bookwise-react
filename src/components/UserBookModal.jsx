@@ -3,10 +3,9 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import Image from '../backgroundImage.png'
 import { useState } from 'react';
 
-const UserBookModal = ({open, handleClose, status}) => {
+const UserBookModal = ({open, handleClose, title, author, description, category, thumbnail_url, started_date, ended_date, status}) => {
   const [bookStatus, setBookStatus] = useState(status);
   const theme = useTheme();
 
@@ -23,15 +22,13 @@ const UserBookModal = ({open, handleClose, status}) => {
     >
       <Box padding={3} sx={{my:'20%', width: '50%', mx: 'auto', bgcolor: theme.palette.background.default}} position={'relative'}>
         <Stack direction='row'>
-          <img src={Image} alt="" width={"200px"} />
+          <img src={thumbnail_url} alt="" width={"200px"} />
           <Box padding={5} color={theme.palette.text.primary}>
-            <Typography variant="h6" color="inherit">The TITLE</Typography>
-            <Typography variant="subtitle2" color="inherit">By Darren Hardy</Typography>
+            <Typography variant="h6" color="inherit">{title}</Typography>
+            <Typography variant="subtitle2" color="inherit">By {author}</Typography>
             <Rating name="read-only" size='small' value={3} readOnly />
             <Typography variant="body2" color="inherit" paragraph>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit,
-              quam beatae rerum inventore consectetur,
-              neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
+              {description}
             </Typography>
             <Stack direction={'row'} spacing={1}>
               <Button href="signup" color='secondary' variant='contained'>Remove from Library</Button>
