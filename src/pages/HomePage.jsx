@@ -3,10 +3,18 @@ import { useAuth } from "../context/Auth";
 import { Alert, Grid } from "@mui/material";
 import { Container } from "@mui/system";
 import BookCard from "../components/BookCard";
+import { useFetchhBooksData } from "../hooks/useBooksData";
 
 const HomePage = () => {
+  const [books, setBooks] = useState(null);
   const auth = useAuth();
   const [alert, setAlert] = useState(auth.alert.open);
+
+  const onSuccess = (data) => {
+    setBooks(data.data)
+  };
+
+  const { isLoading } = useFetchhBooksData(onSuccess);
 
   return (
     <>
