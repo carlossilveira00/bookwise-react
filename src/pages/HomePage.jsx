@@ -29,18 +29,21 @@ const HomePage = () => {
       { alert === true && <Alert onClose={() => {setAlert(false)}} sx={{width: '50%', mx: 'auto', marginTop: '20px'}} severity={auth.alert.severity}>{auth.alert.message}</Alert>}
       <Container sx={{mt: 5}}>
         <Grid container spacing={3}>
-          <Grid item xs={6}>
-          <BookCard title={'Hey Lion'}></BookCard>
-          </Grid>
-          <Grid item xs={6}>
-          <BookCard title={'Hey Cat'}></BookCard>
-          </Grid>
-          <Grid item xs={6}>
-            <BookCard title={'Hey John'}></BookCard>
-          </Grid>
-          <Grid item xs={6}>
-            <BookCard title={'Hey Joe'}></BookCard>
-          </Grid>
+          {books.map( book =>(
+            <Grid item xs={6} key={book.id} >
+              <BookCard
+              key={book.id}
+              title={book.title}
+              author={book.author}
+              description={book.description}
+              category={book.category}
+              thumbnail_url={book.thumbnail_url}
+              ISBN={book.ISBN}
+              bookId={book.id}
+              />
+            </Grid>
+            ))
+          }
         </Grid>
       </Container>
     </>
