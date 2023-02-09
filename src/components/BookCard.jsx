@@ -1,9 +1,8 @@
 import { Box, Button, Paper, Rating, Stack, Typography} from '@mui/material';
 import { useState } from 'react';
-import Image from '../backgroundImage.png'
 import BookModal from './BookModal';
 
-const BookCard = ({title}) => {
+const BookCard = ({title, author, description, category, thumbnail_url, ISBN, bookId}) => {
   // Set State to track if the modal is open or not.
   const [open, setOpen] = useState(false);
 
@@ -18,10 +17,10 @@ const BookCard = ({title}) => {
       <Button onClick={handleOpen}>
         <Paper color='white' sx={{textTransform: 'none'}}>
           <Stack direction='row'>
-            <img src={Image} alt="" width={"200px"} style={{display: 'block'}} />
+            <img src={thumbnail_url} alt="" width={"200px"} style={{display: 'block', maxHeight: '270px'}} />
             <Box padding={2}>
-              <Typography variant="h6" color="inherit">The Compound Effect</Typography>
-              <Typography variant="subtitle2" color="inherit">By Darren Hardy</Typography>
+              <Typography variant="h6" color="inherit">{title}</Typography>
+              <Typography variant="subtitle2" color="inherit">By {author}</Typography>
               <Rating name="read-only" size='small' value={3} readOnly />
               <Typography variant="body2" color="inherit" paragraph
               style={{
@@ -29,12 +28,10 @@ const BookCard = ({title}) => {
                 overflow: 'scroll',
                 textOverflow: 'ellipsis',
               }}>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit,
-                quam beatae rerum inventore consectetur,
-                neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
+                {description}
               </Typography>
               <Typography variant="overline" align='right' display="block" gutterBottom sx={{ fontWeight: 'bolder' }}>
-                Finances
+                {category}
               </Typography>
             </Box>
           </Stack>
@@ -44,6 +41,12 @@ const BookCard = ({title}) => {
       open={open}
       handleClose={handleClose}
       title={title}
+      author={author}
+      description={description}
+      category={category}
+      thumbnail_url={thumbnail_url}
+      ISBN={ISBN}
+      bookId={bookId}
       />
     </>
   )

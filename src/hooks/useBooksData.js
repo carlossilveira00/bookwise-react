@@ -1,4 +1,4 @@
-import { useMutation} from "react-query";
+import { useMutation, useQuery} from "react-query";
 import axios from "axios";
 
 const addBook = (bookInformation) => {
@@ -8,6 +8,17 @@ const addBook = (bookInformation) => {
   return axios.post('http://localhost:3000/books', bookInformation);
 };
 
+const fetchBooks = () => {
+  return axios.get('http://localhost:3000/books');
+};
+
 export const useAddBookData = () => {
   return useMutation(addBook)
+};
+
+
+export const useFetchhBooksData = (onSuccess) => {
+  return useQuery('books', fetchBooks,{
+    onSuccess
+  });
 };
