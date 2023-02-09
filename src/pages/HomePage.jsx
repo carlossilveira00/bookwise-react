@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../context/Auth";
-import { Alert, Grid } from "@mui/material";
+import { Alert, Grid, Box, CircularProgress } from "@mui/material";
 import { Container } from "@mui/system";
 import BookCard from "../components/BookCard";
 import { useFetchhBooksData } from "../hooks/useBooksData";
@@ -15,6 +15,14 @@ const HomePage = () => {
   };
 
   const { isLoading } = useFetchhBooksData(onSuccess);
+
+  if (isLoading){
+    return(
+      <Box display={'flex'} justifyContent={'center'} alignItems={'center'} height={'100vh'}>
+        <CircularProgress sx={{mx: 'auto'}}></CircularProgress>
+      </Box>
+    )
+  }
 
   return (
     <>
