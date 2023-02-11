@@ -1,4 +1,4 @@
-import { useMutation, useQuery} from "react-query";
+import { useMutation, useInfiniteQuery} from "react-query";
 import axios from "axios";
 
 const addBook = (bookInformation) => {
@@ -8,8 +8,8 @@ const addBook = (bookInformation) => {
   return axios.post('http://localhost:3000/books', bookInformation);
 };
 
-const fetchBooks = () => {
-  return axios.get('http://localhost:3000/books');
+const fetchBooks = ({pageParam = 1}) => {
+  return axios.get(`http://localhost:3000/books?page=${pageParam}`);
 };
 
 export const useAddBookData = () => {
@@ -17,8 +17,18 @@ export const useAddBookData = () => {
 };
 
 
-export const useFetchhBooksData = (onSuccess) => {
-  return useQuery('books', fetchBooks,{
-    onSuccess
-  });
+export const useFetchBooksData = (onSuccess) => {
+  return useInfiniteQuery(
+    'repos',
+    fetchBooks,
+    {
+      getNextPageParam: (lastPage, pages) => {
+        if (lastPage.data.length !== 0){
+          return pages.length + 1
+        } else {
+          return undefined
+        }
+      }
+    }
+  );
 };
