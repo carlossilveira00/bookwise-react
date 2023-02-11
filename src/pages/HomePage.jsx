@@ -5,7 +5,7 @@ import { Container } from "@mui/system";
 import BookCard from "../components/BookCard";
 import { useFetchBooksData } from "../hooks/useBooksData";
 
-const HomePage = () => {
+const HomePage = ({searchQuery}) => {
   const auth = useAuth();
   const [alert, setAlert] = useState(auth.alert.open);
 
@@ -28,7 +28,7 @@ const HomePage = () => {
             return (
             <Fragment key={index}>
               {
-                group.data.map(book => (
+                group.data.filter( book => book.title.includes(searchQuery) || book.author.includes(searchQuery) || book.category.includes(searchQuery)).map(book => (
                   <Grid item xs={6} key={book.id} >
                     <BookCard
                     key={book.id}
