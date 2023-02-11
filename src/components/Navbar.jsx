@@ -7,12 +7,17 @@ import logo from '../Rero-8.svg';
 import MenuIcon from '@mui/icons-material/Menu';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 
-const Navbar = ({colorMode, setColorMode}) => {
+const Navbar = ({colorMode, setColorMode, setSearchQuery}) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const auth = useAuth();
   const navigate = useNavigate();
   let menu;
+
+  // Pass this function to the SearchBar component to set the query the user want to search.
+  const handleQueryChange = (event) => {
+    setSearchQuery(event.target.value);
+  }
 
   // Handles Color Mode Change.
   const handleColorModeChange = () => {
@@ -85,7 +90,7 @@ const Navbar = ({colorMode, setColorMode}) => {
     <AppBar position='static' color='default'>
       <Toolbar>
         <img src={logo} alt="" width={"100px"}/>
-        <SearchBar placeholder={'Search for Title, Author or ISBN'} />
+        <SearchBar placeholder={'Search for Title, Author'} handleQueryChange={handleQueryChange} />
         <Stack direction="row" spacing={2} sx={{marginLeft: "auto"}}>
           {menu}
         </Stack>

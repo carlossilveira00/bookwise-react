@@ -30,17 +30,18 @@ const designTheme = (colorMode) => {
 
 function App() {
   const [mode, setMode] = useState('light');
+  const [searchQuery, setSearchQuery] = useState('');
   const queryClient = new QueryClient();
 
-  const theme = createTheme(designTheme(mode))
+  const theme = createTheme(designTheme(mode));
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <ThemeProvider theme={theme} >
           <ScopedCssBaseline enableColorScheme>
-            <Navbar colorMode={mode} setColorMode={setMode}/>
+            <Navbar colorMode={mode} setColorMode={setMode} setSearchQuery={setSearchQuery}/>
             <Routes>
-              <Route path='/' element={<HomePage/>} />
+              <Route path='/' element={<HomePage searchQuery={searchQuery}/>} />
               <Route path='login' element={<LoginPage/>} />
               <Route path='signup' element={<SignUpPage/>} />
               <Route path='create-book' element={<CreateBookPage/>}/>
