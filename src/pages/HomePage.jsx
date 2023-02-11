@@ -3,30 +3,13 @@ import { useAuth } from "../context/Auth";
 import { Alert, Grid, Box, CircularProgress, Button, Stack } from "@mui/material";
 import { Container } from "@mui/system";
 import BookCard from "../components/BookCard";
-import axios from "axios";
-import { useInfiniteQuery } from "react-query";
+import { useFetchBooksData } from "../hooks/useBooksData";
 
 const HomePage = () => {
   const auth = useAuth();
   const [alert, setAlert] = useState(auth.alert.open);
 
-  const fetchBooks = ({pageParam = 1}) => {
-    return axios.get(`http://localhost:3000/books?page=${pageParam}`);
-  };
-
-  const { data, isLoading, hasNextPage, fetchNextPage} = useInfiniteQuery(
-    'repos',
-    fetchBooks,
-    {
-      getNextPageParam: (lastPage, pages) => {
-        if (lastPage.data.length !== 0){
-          return pages.length + 1
-        } else {
-          return undefined
-        }
-      }
-    }
-  );
+  const { data, isLoading, hasNextPage, fetchNextPage} = useFetchBooksData();
 
   if (isLoading){
     return(
@@ -65,7 +48,7 @@ const HomePage = () => {
           })}
         </Grid>
         <Stack direction={'row'} justifyContent={'center'} marginTop={3} marginBottom={3} >
-        <Button disabled={!hasNextPage} onClick={fetchNextPage} color='primary' variant='contained' sx={{width: '25%'}}>Load More Books</Button>
+          <Button disabled={!hasNextPage} onClick={fetchNextPage} color='primary' variant='contained' sx={{width: '25%'}}>Load More Books</Button>
         </Stack>
       </Container>
     </>
