@@ -9,7 +9,7 @@ const addBook = (bookInformation) => {
 };
 
 const fetchBooks = () => {
-  return axios.get('http://localhost:3000/books');
+  return axios.get('http://localhost:3000/books?limit=10&_offset=1');
 };
 
 export const useAddBookData = () => {
