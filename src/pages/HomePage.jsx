@@ -1,6 +1,6 @@
 import { Fragment, useState } from "react";
 import { useAuth } from "../context/Auth";
-import { Alert, Grid, Box, CircularProgress } from "@mui/material";
+import { Alert, Grid, Box, CircularProgress, Button, Stack } from "@mui/material";
 import { Container } from "@mui/system";
 import BookCard from "../components/BookCard";
 import axios from "axios";
@@ -64,7 +64,9 @@ const HomePage = () => {
             )
           })}
         </Grid>
-        <button disabled={!hasNextPage} onClick={fetchNextPage}>Load More</button>
+        <Stack direction={'row'} justifyContent={'center'} marginTop={3} marginBottom={3} >
+        <Button disabled={!hasNextPage} onClick={fetchNextPage} color='primary' variant='contained' sx={{width: '25%'}}>Load More Books</Button>
+        </Stack>
       </Container>
     </>
   )
