@@ -41,7 +41,7 @@ const BookModal = ({open, handleClose,title, author, description, category, thum
             <Typography variant="h6" color="inherit">{title}</Typography>
             <Typography variant="subtitle2" color="inherit">By {author}</Typography>
             <Rating name="read-only" size='small' value={3} readOnly />
-            <Typography variant="body2" color="inherit" paragraph>
+            <Typography variant="body2" color="inherit" paragraph sx={{maxHeight: '150px', overflow: 'scroll', textOverflow: 'ellipsis'}}>
               {description}
             </Typography>
             <Stack direction={'row'} spacing={1}>

@@ -15,7 +15,7 @@ const BookCard = ({title, author, description, category, thumbnail_url, ISBN, bo
   return (
     <>
       <Button onClick={handleOpen}>
-        <Paper color='white' sx={{textTransform: 'none', height: '250px'}}>
+        <Paper color='white' sx={{textTransform: 'none', maxHeight: '250px'}}>
           <Stack direction='row'>
             <img src={thumbnail_url} alt="" width={"200px"} style={{display: 'block', height: '250px'}} />
             <Box padding={2}>
