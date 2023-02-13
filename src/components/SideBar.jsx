@@ -19,6 +19,7 @@ import MenuBookIcon from '@mui/icons-material/MenuBook';
 import { useTheme } from '@emotion/react';
 import SearchNotes from './SearchNotes';
 import BookIconWithTitle from './BookIconWithTitle';
+import BooksAccordion from './BooksAccordion';
 
 const names = [
   'Oliver Hansen',
@@ -101,33 +102,12 @@ const SideBar = ({setOpen, open}) => {
           <Typography variant="overline" fontSize={11} color="initial">Books</Typography>
         </Divider>
         <Box mt={2}>
-          <Accordion>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1a-content"
-              id="panel1a-header"
-            >
-              <Typography variant="body1" color="initial">In Progress</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <BookIconWithTitle></BookIconWithTitle>
-              <BookIconWithTitle></BookIconWithTitle>
-              <BookIconWithTitle></BookIconWithTitle>
-            </AccordionDetails>
-          </Accordion>
-          <Accordion>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1a-content"
-              id="panel1a-header"
-            >
-              <Typography variant="body1" color="initial">Completed</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <BookIconWithTitle></BookIconWithTitle>
-              <BookIconWithTitle></BookIconWithTitle>
-            </AccordionDetails>
-          </Accordion>
+          <BooksAccordion
+            title={'In Progress'}
+          />
+          <BooksAccordion
+            title={'Completed'}
+          />
         </Box>
 
         <Divider textAlign='center' sx={{mt: 2}}>
