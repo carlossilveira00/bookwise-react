@@ -18,6 +18,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import { useTheme } from '@emotion/react';
 import SearchNotes from './SearchNotes';
+import BookIconWithTitle from './BookIconWithTitle';
 
 const names = [
   'Oliver Hansen',
@@ -99,7 +100,7 @@ const SideBar = ({setOpen, open}) => {
         <Divider textAlign='center' sx={{mt: 2}}>
           <Typography variant="overline" fontSize={11} color="initial">Books</Typography>
         </Divider>
-        <Box>
+        <Box mt={2}>
           <Accordion>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
@@ -109,18 +110,9 @@ const SideBar = ({setOpen, open}) => {
               <Typography variant="body1" color="initial">In Progress</Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Stack onClick={() => {console.log('Hey')}} direction={'row'} alignItems={'center'} sx={{textDecoration: 'none', boxShadow: 1, my: 1}} padding={1}>
-                <MenuBookIcon color='primary' sx={{mr: 1}}></MenuBookIcon>
-                <Typography variant="body1" fontSize={14} color="initial">The Compound Effect</Typography>
-              </Stack>
-              <Stack onClick={() => {console.log('Hey')}} direction={'row'} alignItems={'center'} sx={{textDecoration: 'none', boxShadow: 1, my: 1}} padding={1}>
-                <MenuBookIcon color='primary' sx={{mr: 1}}></MenuBookIcon>
-                <Typography variant="body1" fontSize={14} color="initial">The Compound Effect</Typography>
-              </Stack>
-              <Stack onClick={() => {console.log('Hey')}} direction={'row'} alignItems={'center'} sx={{textDecoration: 'none', boxShadow: 1, my: 1}} padding={1}>
-                <MenuBookIcon color='primary' sx={{mr: 1}}></MenuBookIcon>
-                <Typography variant="body1" fontSize={14} color="initial">The Compound Effect</Typography>
-              </Stack>
+              <BookIconWithTitle></BookIconWithTitle>
+              <BookIconWithTitle></BookIconWithTitle>
+              <BookIconWithTitle></BookIconWithTitle>
             </AccordionDetails>
           </Accordion>
           <Accordion>
@@ -132,18 +124,8 @@ const SideBar = ({setOpen, open}) => {
               <Typography variant="body1" color="initial">Completed</Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Stack onClick={() => {console.log('Hey')}} direction={'row'} alignItems={'center'} sx={{textDecoration: 'none', boxShadow: 1}} padding={1}>
-                  <MenuBookIcon color='primary' sx={{mr: 1}}></MenuBookIcon>
-                  <Typography variant="body1" fontSize={14} color="initial">The Compound Effect</Typography>
-                </Stack>
-                <Stack onClick={() => {console.log('Hey')}} direction={'row'} alignItems={'center'} sx={{textDecoration: 'none', boxShadow: 1}} padding={1}>
-                  <MenuBookIcon color='primary' sx={{mr: 1}}></MenuBookIcon>
-                  <Typography variant="body1" fontSize={14} color="initial">The Compound Effect</Typography>
-                </Stack>
-                <Stack onClick={() => {console.log('Hey')}} direction={'row'} alignItems={'center'} sx={{textDecoration: 'none', boxShadow: 1}} padding={1}>
-                  <MenuBookIcon color='primary' sx={{mr: 1}}></MenuBookIcon>
-                  <Typography variant="body1" fontSize={14} color="initial">The Compound Effect</Typography>
-                </Stack>
+              <BookIconWithTitle></BookIconWithTitle>
+              <BookIconWithTitle></BookIconWithTitle>
             </AccordionDetails>
           </Accordion>
         </Box>
