@@ -1,40 +1,21 @@
-import { Accordion, AccordionDetails, AccordionSummary, AppBar, Button, CssBaseline, Divider, Drawer, FormControl, List, MenuItem, OutlinedInput, Paper, Select, Stack, Toolbar, Typography } from '@mui/material';
-import React from 'react'
+import { useTheme } from '@emotion/react';
+import { AppBar, CssBaseline, Divider, Drawer, List, Toolbar, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-// import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-import SearchIcon from '@mui/icons-material/Search';
-import DirectionsIcon from '@mui/icons-material/Directions';
-import InputBase from '@mui/material/InputBase';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MenuBookIcon from '@mui/icons-material/MenuBook';
-import { useTheme } from '@emotion/react';
 import SearchNotes from './SearchNotes';
-import BookIconWithTitle from './BookIconWithTitle';
+import IconButton from '@mui/material/IconButton';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import BooksAccordion from './BooksAccordion';
+import HomeIcon from '@mui/icons-material/Home';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import LogoutIcon from '@mui/icons-material/Logout';
 
-const names = [
-  'Oliver Hansen',
-  'Van Henry',
-  'April Tucker',
-  'Ralph Hubbard',
-  'Omar Alexander',
-  'Carlos Abbott',
-  'Miriam Wagner',
-  'Bradley Wilkerson',
-  'Virginia Andrews',
-  'Kelly Snyder',
-];
-
-const SideBar = ({setOpen, open}) => {
+const SideBar = ({setOpen, open, colorMode, setColorMode,}) => {
   const theme = useTheme();
 
   const handleDrawerOpen = () => {
@@ -45,16 +26,13 @@ const SideBar = ({setOpen, open}) => {
     setOpen(false);
   };
 
-  const [personName, setPersonName] = React.useState([]);
+  const handleColorModeChange = () => {
+    colorMode === 'light' ? setColorMode('dark') : setColorMode('light')
+  };
 
-  const handleChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setPersonName(
-      // On autofill we get a stringified value.
-      typeof value === 'string' ? value.split(',') : value,
-    );
+  const handleLogout = () => {
+    // auth.logout();
+    // navigate('/', {replace: true})
   };
 
   return (
@@ -109,21 +87,42 @@ const SideBar = ({setOpen, open}) => {
             title={'Completed'}
           />
         </Box>
-
         <Divider textAlign='center' sx={{mt: 2}}>
-          <Typography variant="overline" fontSize={11} color="initial">Books</Typography>
+          <Typography variant="overline" fontSize={11} color="initial">Menu</Typography>
         </Divider>
         <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
+          <ListItem disablePadding>
+            <ListItemButton href='/'>
+              <ListItemIcon>
+                <HomeIcon />
+              </ListItemIcon>
+              <ListItemText>Home</ListItemText>
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton href='my-library'>
+              <ListItemIcon>
+                <AccountBoxIcon />
+              </ListItemIcon>
+              <ListItemText>Profile</ListItemText>
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton onClick={handleColorModeChange}>
+              <ListItemIcon>
+                <Brightness4Icon />
+              </ListItemIcon>
+              <ListItemText>Mode</ListItemText>
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton onClick={handleLogout}>
+              <ListItemIcon>
+                <LogoutIcon />
+              </ListItemIcon>
+              <ListItemText>Logout</ListItemText>
+            </ListItemButton>
+          </ListItem>
         </List>
       </Drawer>
       <Box />
