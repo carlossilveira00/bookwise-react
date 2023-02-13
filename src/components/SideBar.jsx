@@ -1,4 +1,4 @@
-import { AppBar, CssBaseline, Divider, Drawer, List, Toolbar, Typography } from '@mui/material';
+import { Accordion, AccordionDetails, AccordionSummary, AppBar, Button, CssBaseline, Divider, Drawer, FormControl, List, MenuItem, OutlinedInput, Paper, Select, Stack, Toolbar, Typography } from '@mui/material';
 import React from 'react'
 import { Box } from '@mui/system';
 import IconButton from '@mui/material/IconButton';
@@ -11,10 +11,28 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import SearchIcon from '@mui/icons-material/Search';
+import DirectionsIcon from '@mui/icons-material/Directions';
+import InputBase from '@mui/material/InputBase';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
 import { useTheme } from '@emotion/react';
+import SearchNotes from './SearchNotes';
 
-const SideBar = () => {
-  const [open, setOpen] = React.useState(false);
+const names = [
+  'Oliver Hansen',
+  'Van Henry',
+  'April Tucker',
+  'Ralph Hubbard',
+  'Omar Alexander',
+  'Carlos Abbott',
+  'Miriam Wagner',
+  'Bradley Wilkerson',
+  'Virginia Andrews',
+  'Kelly Snyder',
+];
+
+const SideBar = ({setOpen, open}) => {
   const theme = useTheme();
 
   const handleDrawerOpen = () => {
@@ -25,13 +43,25 @@ const SideBar = () => {
     setOpen(false);
   };
 
+  const [personName, setPersonName] = React.useState([]);
+
+  const handleChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setPersonName(
+      // On autofill we get a stringified value.
+      typeof value === 'string' ? value.split(',') : value,
+    );
+  };
+
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
+      <AppBar position="fixed" open={open} sx={{bgcolor: theme.palette.background.default}}>
         <Toolbar>
           <IconButton
-            color="inherit"
+            color="secondary"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
@@ -42,15 +72,14 @@ const SideBar = () => {
           <Typography variant="h6" noWrap component="div">
             Persistent drawer
           </Typography>
-
         </Toolbar>
       </AppBar>
       <Drawer
         sx={{
-          width: 240,
+          width: 300,
           flexShrink: 0,
           '& .MuiDrawer-paper': {
-            width: 240,
+            width: 300,
             boxSizing: 'border-box',
           },
         }}
@@ -63,20 +92,65 @@ const SideBar = () => {
             <ChevronLeftIcon />
           </IconButton>
         </Box>
-        <Divider />
-        <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
+        <Divider textAlign='center' >
+          <Typography variant="overline" fontSize={11} color="initial">Search</Typography>
+        </Divider>
+        <SearchNotes />
+        <Divider textAlign='center' sx={{mt: 2}}>
+          <Typography variant="overline" fontSize={11} color="initial">Books</Typography>
+        </Divider>
+        <Box>
+          <Accordion>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1a-content"
+              id="panel1a-header"
+            >
+              <Typography variant="body1" color="initial">In Progress</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Stack onClick={() => {console.log('Hey')}} direction={'row'} alignItems={'center'} sx={{textDecoration: 'none', boxShadow: 1, my: 1}} padding={1}>
+                <MenuBookIcon color='primary' sx={{mr: 1}}></MenuBookIcon>
+                <Typography variant="body1" fontSize={14} color="initial">The Compound Effect</Typography>
+              </Stack>
+              <Stack onClick={() => {console.log('Hey')}} direction={'row'} alignItems={'center'} sx={{textDecoration: 'none', boxShadow: 1, my: 1}} padding={1}>
+                <MenuBookIcon color='primary' sx={{mr: 1}}></MenuBookIcon>
+                <Typography variant="body1" fontSize={14} color="initial">The Compound Effect</Typography>
+              </Stack>
+              <Stack onClick={() => {console.log('Hey')}} direction={'row'} alignItems={'center'} sx={{textDecoration: 'none', boxShadow: 1, my: 1}} padding={1}>
+                <MenuBookIcon color='primary' sx={{mr: 1}}></MenuBookIcon>
+                <Typography variant="body1" fontSize={14} color="initial">The Compound Effect</Typography>
+              </Stack>
+            </AccordionDetails>
+          </Accordion>
+          <Accordion>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1a-content"
+              id="panel1a-header"
+            >
+              <Typography variant="body1" color="initial">Completed</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Stack onClick={() => {console.log('Hey')}} direction={'row'} alignItems={'center'} sx={{textDecoration: 'none', boxShadow: 1}} padding={1}>
+                  <MenuBookIcon color='primary' sx={{mr: 1}}></MenuBookIcon>
+                  <Typography variant="body1" fontSize={14} color="initial">The Compound Effect</Typography>
+                </Stack>
+                <Stack onClick={() => {console.log('Hey')}} direction={'row'} alignItems={'center'} sx={{textDecoration: 'none', boxShadow: 1}} padding={1}>
+                  <MenuBookIcon color='primary' sx={{mr: 1}}></MenuBookIcon>
+                  <Typography variant="body1" fontSize={14} color="initial">The Compound Effect</Typography>
+                </Stack>
+                <Stack onClick={() => {console.log('Hey')}} direction={'row'} alignItems={'center'} sx={{textDecoration: 'none', boxShadow: 1}} padding={1}>
+                  <MenuBookIcon color='primary' sx={{mr: 1}}></MenuBookIcon>
+                  <Typography variant="body1" fontSize={14} color="initial">The Compound Effect</Typography>
+                </Stack>
+            </AccordionDetails>
+          </Accordion>
+        </Box>
+
+        <Divider textAlign='center' sx={{mt: 2}}>
+          <Typography variant="overline" fontSize={11} color="initial">Books</Typography>
+        </Divider>
         <List>
           {['All mail', 'Trash', 'Spam'].map((text, index) => (
             <ListItem key={text} disablePadding>
@@ -91,52 +165,6 @@ const SideBar = () => {
         </List>
       </Drawer>
       <Box />
-      <Box open={open}
-        sx={{
-          flexGrow: 1,
-          padding: theme.spacing(3),
-          transition: theme.transitions.create('margin', {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen,
-          }),
-          marginLeft: `-240px`,
-          ...(open && {
-            transition: theme.transitions.create('margin', {
-              easing: theme.transitions.easing.easeOut,
-              duration: theme.transitions.duration.enteringScreen,
-            }),
-            marginLeft: 0,
-          }),
-        }}
-      >
-        <Typography paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non
-          enim praesent elementum facilisis leo vel. Risus at ultrices mi tempus
-          imperdiet. Semper risus in hendrerit gravida rutrum quisque non tellus.
-          Convallis convallis tellus id interdum velit laoreet id donec ultrices.
-          Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-          adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra
-          nibh cras. Metus vulputate eu scelerisque felis imperdiet proin fermentum
-          leo. Mauris commodo quis imperdiet massa tincidunt. Cras tincidunt lobortis
-          feugiat vivamus at augue. At augue eget arcu dictum varius duis at
-          consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa
-          sapien faucibus et molestie ac.
-        </Typography>
-        <Typography paragraph>
-          Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper
-          eget nulla facilisi etiam dignissim diam. Pulvinar elementum integer enim
-          neque volutpat ac tincidunt. Ornare suspendisse sed nisi lacus sed viverra
-          tellus. Purus sit amet volutpat consequat mauris. Elementum eu facilisis
-          sed odio morbi. Euismod lacinia at quis risus sed vulputate odio. Morbi
-          tincidunt ornare massa eget egestas purus viverra accumsan in. In hendrerit
-          gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem
-          et tortor. Habitant morbi tristique senectus et. Adipiscing elit duis
-          tristique sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
-          eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
-          posuere sollicitudin aliquam ultrices sagittis orci a.
-        </Typography>
-      </Box>
     </Box>
   )
 };
