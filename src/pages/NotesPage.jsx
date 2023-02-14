@@ -4,14 +4,14 @@ import { useTheme } from "@emotion/react";
 import SideBar from "../components/SideBar";
 import { useState } from "react";
 
-const NotesPage = () => {
+const NotesPage = ({colorMode, setColorMode}) => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
 
   return (
     <>
     <Stack direction={'row'}>
-      <SideBar open={open} setOpen={setOpen}/>
+      <SideBar open={open} setOpen={setOpen} colorMode={colorMode} setColorMode={setColorMode}/>
       <Box open={open}
         sx={{
           flexGrow: 1,

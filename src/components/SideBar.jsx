@@ -15,7 +15,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import LogoutIcon from '@mui/icons-material/Logout';
 
-const SideBar = ({setOpen, open, colorMode, setColorMode,}) => {
+const SideBar = ({setOpen, open, colorMode, setColorMode}) => {
   const theme = useTheme();
 
   const handleDrawerOpen = () => {

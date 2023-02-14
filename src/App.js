@@ -47,7 +47,7 @@ function App() {
               <Route path='signup' element={<SignUpPage/>} />
               <Route path='create-book' element={<CreateBookPage/>}/>
               <Route path='my-library' element={<LibraryPage/>}/>
-              <Route path='my-notes' element={<NotesPage />}/>
+              <Route path='my-notes' element={<NotesPage colorMode={mode} setColorMode={setMode} />}/>
             </Routes>
           </ScopedCssBaseline>
         </ThemeProvider>
