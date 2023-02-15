@@ -14,25 +14,33 @@ import BooksAccordion from './BooksAccordion';
 import HomeIcon from '@mui/icons-material/Home';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/Auth';
 
 const SideBar = ({setOpen, open, colorMode, setColorMode}) => {
   const theme = useTheme();
+  const auth = useAuth();
+  const navigate = useNavigate();
 
+  // Function used to open the drower component.
   const handleDrawerOpen = () => {
     setOpen(true);
   };
 
+  // Function used to close the drower.
   const handleDrawerClose = () => {
     setOpen(false);
   };
 
+  // Function passed to the Color Mode to switch between light and dark mode for the application.
   const handleColorModeChange = () => {
     colorMode === 'light' ? setColorMode('dark') : setColorMode('light')
   };
 
+  // Functions handles logout of the user and redirects to the home page.
   const handleLogout = () => {
-    // auth.logout();
-    // navigate('/', {replace: true})
+    auth.logout();
+    navigate('/', {replace: true})
   };
 
   return (
