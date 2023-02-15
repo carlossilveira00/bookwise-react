@@ -3,6 +3,8 @@ import { Stack } from "@mui/system";
 import { useTheme } from "@emotion/react";
 import SideBar from "../components/SideBar";
 import { useState } from "react";
+import Note from "../components/Note";
+
 
 const NotesPage = ({colorMode, setColorMode}) => {
   const theme = useTheme();
@@ -34,11 +36,9 @@ const NotesPage = ({colorMode, setColorMode}) => {
           <Box sx={{border: '1px solid red', height: '100vh', width: '20%', textAlign:'center'}}>
             <Typography variant="overline" fontSize={11} color="initial">Notes</Typography>
             <Box padding={1}>
-              <Stack onClick={() => {console.log('Hey')}} sx={{ boxShadow: 1, textAlign: 'left', whiteSpace: 'nowrap', padding: 2}} >
-                <Typography variant="body1" fontSize={18} color="initial">The Compound Effect</Typography>
-                <Typography variant="body2" fontSize={12} color="initial" sx={{ overflow: 'hidden', textOverflow: 'ellipsis', ml: 1}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod</Typography>
-                <Typography variant="body1" fontSize={11} color="initial" sx={{textAlign: 'right', mt: 1}}>01/01/2022</Typography>
-              </Stack>
+              <Note></Note>
+              <Note></Note>
+              <Note></Note>
             </Box>
           </Box>
           <Box sx={{border: '1px solid red', height: '100vh', width: 'fill-available'}}>
