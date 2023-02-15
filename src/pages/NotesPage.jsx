@@ -4,6 +4,7 @@ import { useTheme } from "@emotion/react";
 import SideBar from "../components/SideBar";
 import { useState } from "react";
 import Note from "../components/Note";
+import ShowNotes from "../components/ShowNotes";
 
 
 const NotesPage = ({colorMode, setColorMode}) => {
@@ -33,14 +34,11 @@ const NotesPage = ({colorMode, setColorMode}) => {
         }}
       >
         <Box display={'flex'}>
-          <Box sx={{border: '1px solid red', height: '100vh', width: '20%', textAlign:'center'}}>
-            <Typography variant="overline" fontSize={11} color="initial">Notes</Typography>
-            <Box padding={1}>
-              <Note></Note>
-              <Note></Note>
-              <Note></Note>
-            </Box>
-          </Box>
+          <ShowNotes>
+            <Note></Note>
+            <Note></Note>
+            <Note></Note>
+          </ShowNotes>
           <Box sx={{border: '1px solid red', height: '100vh', width: 'fill-available'}}>
             <Typography paragraph>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
