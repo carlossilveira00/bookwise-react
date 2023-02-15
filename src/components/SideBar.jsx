@@ -14,9 +14,13 @@ import BooksAccordion from './BooksAccordion';
 import HomeIcon from '@mui/icons-material/Home';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/Auth';
 
 const SideBar = ({setOpen, open, colorMode, setColorMode}) => {
   const theme = useTheme();
+  const auth = useAuth();
+  const navigate = useNavigate();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -31,8 +35,8 @@ const SideBar = ({setOpen, open, colorMode, setColorMode}) => {
   };
 
   const handleLogout = () => {
-    // auth.logout();
-    // navigate('/', {replace: true})
+    auth.logout();
+    navigate('/', {replace: true})
   };
 
   return (
