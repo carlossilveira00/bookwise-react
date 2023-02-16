@@ -86,7 +86,7 @@ const NotesPage = ({colorMode, setColorMode}) => {
           </ShowNotes>
           <Box sx={{border: '1px solid red', height: '100vh', width: 'fill-available', padding: 3}}>
             <Box sx={{border: '1px solid green', color: 'red'}}>
-              <ReactTrixRTEToolbar toolbarId='toolbar-editor'></ReactTrixRTEToolbar>
+              {/* <ReactTrixRTEToolbar toolbarId='toolbar-editor'></ReactTrixRTEToolbar> */}
               <trix-toolbar id="trix-toolbar">
                 {/* <Box display={'flex'} justifyContent={'space-between'}>
                   <ButtonGroup>
@@ -135,45 +135,64 @@ const NotesPage = ({colorMode, setColorMode}) => {
                     </Button>
                   </ButtonGroup>
                 </Box> */}
-                <ToggleButtonGroup
-                  size="small"
-                  value={formats}
-                  onChange={handleFormat}
-                  aria-label="text formatting"
-                >
-                  <ToggleButton value="left" aria-label="left aligned">
-                    <FormatBoldIcon />
-                  </ToggleButton>
-                  <ToggleButton value="center" aria-label="centered">
-                    <FormatItalicIcon />
-                  </ToggleButton>
-                  <ToggleButton value="right" aria-label="right aligned">
-                    <StrikethroughSIcon />
-                  </ToggleButton>
-                  <ToggleButton value="justify" aria-label="justified" >
-                    <AddLinkIcon />
-                  </ToggleButton>
-                </ToggleButtonGroup>
-                <ToggleButtonGroup
-                  size="small"
-                  value={alignment}
-                  exclusive
-                  onChange={handleAlignment}
-                  aria-label="text alignment"
-                >
-                  <ToggleButton value="left" aria-label="left aligned">
-                    <TitleIcon />
-                  </ToggleButton>
-                  <ToggleButton value="center" aria-label="centered">
-                    <FormatAlignCenterIcon />
-                  </ToggleButton>
-                  <ToggleButton value="right" aria-label="right aligned">
-                    <FormatAlignRightIcon />
-                  </ToggleButton>
-                  <ToggleButton value="justify" aria-label="justified" disabled>
-                    <FormatAlignJustifyIcon />
-                  </ToggleButton>
-                </ToggleButtonGroup>
+                <Box display={'flex'} justifyContent={'space-between'}>
+                  <ToggleButtonGroup
+                    size="small"
+                    value={formats}
+                    onChange={handleFormat}
+                    aria-label="text formatting"
+                  >
+                    <ToggleButton value="left" aria-label="left aligned">
+                      <FormatBoldIcon />
+                    </ToggleButton>
+                    <ToggleButton value="center" aria-label="centered">
+                      <FormatItalicIcon />
+                    </ToggleButton>
+                    <ToggleButton value="right" aria-label="right aligned">
+                      <StrikethroughSIcon />
+                    </ToggleButton>
+                    <ToggleButton value="justify" aria-label="justified" >
+                      <AddLinkIcon />
+                    </ToggleButton>
+                  </ToggleButtonGroup>
+                  <ToggleButtonGroup
+                    size="small"
+                    value={alignment}
+                    exclusive
+                    onChange={handleAlignment}
+                    aria-label="text alignment"
+                  >
+                    <ToggleButton value="left" aria-label="left aligned">
+                      <TitleIcon />
+                    </ToggleButton>
+                    <ToggleButton value="center" aria-label="centered">
+                      <FormatQuoteIcon />
+                    </ToggleButton>
+                    <ToggleButton value="right" aria-label="right aligned">
+                      <CodeIcon />
+                    </ToggleButton>
+                    <ToggleButton value="justify" aria-label="justified" disabled>
+                      <FormatListBulletedIcon />
+                    </ToggleButton>
+                    <ToggleButton value="justify" aria-label="justified" disabled>
+                      <FormatListNumberedIcon />
+                    </ToggleButton>
+                    <ToggleButton value="justify" aria-label="justified" disabled>
+                      <FormatIndentDecreaseIcon />
+                    </ToggleButton>
+                    <ToggleButton value="justify" aria-label="justified" disabled>
+                      <FormatIndentIncreaseIcon />
+                    </ToggleButton>
+                  </ToggleButtonGroup>
+                  <ToggleButtonGroup size="small" >
+                    <ToggleButton value="justify" aria-label="justified" disabled>
+                      <UndoIcon />
+                    </ToggleButton>
+                    <ToggleButton value="justify" aria-label="justified" disabled>
+                      <RedoIcon />
+                    </ToggleButton>
+                  </ToggleButtonGroup>
+                </Box>
               </trix-toolbar>
             </Box>
             <ReactTrixRTEInput
