@@ -23,7 +23,7 @@ const designTheme = (colorMode) => {
       },
       secondary:{
         main: '#565656',
-        light: '9E9E9E'
+        light: '#9E9E9E'
       }
     }
   }
