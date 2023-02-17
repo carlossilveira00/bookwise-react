@@ -42,7 +42,7 @@ const NotesPage = ({colorMode, setColorMode}) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
   const [alignment, setAlignment] = useState('left');
-  const [formats, setFormats] = useState(() => ['italic']);
+  const [formats, setFormats] = useState(() => []);
 
   const handleFormat = (event, newFormats) => {
     setFormats(newFormats);
@@ -86,55 +86,7 @@ const NotesPage = ({colorMode, setColorMode}) => {
           </ShowNotes>
           <Box sx={{border: '1px solid red', height: '100vh', width: 'fill-available', padding: 3}}>
             <Box sx={{border: '1px solid green', color: 'red'}}>
-              {/* <ReactTrixRTEToolbar toolbarId='toolbar-editor'></ReactTrixRTEToolbar> */}
               <trix-toolbar id="trix-toolbar">
-                {/* <Box display={'flex'} justifyContent={'space-between'}>
-                  <ButtonGroup>
-                    <Button variant="contained">
-                      <FormatBoldIcon fontSize="small" />
-                    </Button>
-                    <Button>
-                      <FormatItalicIcon fontSize="small" />
-                    </Button>
-                    <Button>
-                      <StrikethroughSIcon fontSize="small" />
-                    </Button>
-                    <Button>
-                      <AddLinkIcon fontSize="small" />
-                    </Button>
-                  </ButtonGroup>
-                  <ButtonGroup>
-                    <Button>
-                      <TitleIcon fontSize="small" />
-                    </Button>
-                    <Button>
-                      <FormatQuoteIcon fontSize="small" />
-                    </Button>
-                    <Button>
-                      <CodeIcon fontSize="small" />
-                    </Button>
-                    <Button>
-                      <FormatListBulletedIcon fontSize="small" />
-                    </Button>
-                    <Button>
-                      <FormatListNumberedIcon fontSize="small" />
-                    </Button>
-                    <Button>
-                      <FormatIndentDecreaseIcon fontSize="small" />
-                    </Button>
-                    <Button>
-                      <FormatIndentIncreaseIcon fontSize="small" />
-                    </Button>
-                  </ButtonGroup>
-                  <ButtonGroup>
-                    <Button>
-                      <UndoIcon fontSize="small" />
-                    </Button>
-                    <Button>
-                      <RedoIcon fontSize="small" />
-                    </Button>
-                  </ButtonGroup>
-                </Box> */}
                 <Box display={'flex'} justifyContent={'space-between'}>
                   <ToggleButtonGroup
                     size="small"
@@ -142,16 +94,36 @@ const NotesPage = ({colorMode, setColorMode}) => {
                     onChange={handleFormat}
                     aria-label="text formatting"
                   >
-                    <ToggleButton value="left" aria-label="left aligned">
+                    <ToggleButton
+                     value="bold"
+                     aria-label="left aligned"
+                     data-trix-attribute='bold'
+                     data-trix-key='b'
+                    >
                       <FormatBoldIcon />
                     </ToggleButton>
-                    <ToggleButton value="center" aria-label="centered">
+                    <ToggleButton
+                      value="italic"
+                      aria-label="centered"
+                      data-trix-attribute='italic'
+                      data-trix-key='i'
+                    >
                       <FormatItalicIcon />
                     </ToggleButton>
-                    <ToggleButton value="right" aria-label="right aligned">
+                    <ToggleButton
+                      value="strike"
+                      aria-label="right aligned"
+                      data-trix-attribute='strike'
+                    >
                       <StrikethroughSIcon />
                     </ToggleButton>
-                    <ToggleButton value="justify" aria-label="justified" >
+                    <ToggleButton
+                      value="link"
+                      aria-label="justified"
+                      data-trix-attribute='href'
+                      data-trix-action='link'
+                      data-trix-key='k'
+                    >
                       <AddLinkIcon />
                     </ToggleButton>
                   </ToggleButtonGroup>
@@ -162,33 +134,69 @@ const NotesPage = ({colorMode, setColorMode}) => {
                     onChange={handleAlignment}
                     aria-label="text alignment"
                   >
-                    <ToggleButton value="left" aria-label="left aligned">
+                    <ToggleButton
+                      value="title"
+                      aria-label="left aligned"
+                      data-trix-attribute='heading1'
+                    >
                       <TitleIcon />
                     </ToggleButton>
-                    <ToggleButton value="center" aria-label="centered">
+                    <ToggleButton
+                      value="quote"
+                      aria-label="centered"
+                      data-trix-attribute='quote'
+                    >
                       <FormatQuoteIcon />
                     </ToggleButton>
-                    <ToggleButton value="right" aria-label="right aligned">
+                    <ToggleButton
+                    value="code"
+                    aria-label="right aligned"
+                    data-trix-attribute='code'
+                    >
                       <CodeIcon />
                     </ToggleButton>
-                    <ToggleButton value="justify" aria-label="justified" disabled>
+                    <ToggleButton
+                      value="bulletList"
+                      aria-label="justified"
+                      data-trix-attribute='bullet'
+                    >
                       <FormatListBulletedIcon />
                     </ToggleButton>
-                    <ToggleButton value="justify" aria-label="justified" disabled>
+                    <ToggleButton
+                      value="numberList"
+                      aria-label="justified"
+                      data-trix-attribute='number'
+                    >
                       <FormatListNumberedIcon />
                     </ToggleButton>
-                    <ToggleButton value="justify" aria-label="justified" disabled>
+                    <ToggleButton
+                      value="decreaseIdentation"
+                      aria-label="justified"
+                      data-trix-action='decreaseNestingLevel'
+                    >
                       <FormatIndentDecreaseIcon />
                     </ToggleButton>
-                    <ToggleButton value="justify" aria-label="justified" disabled>
+                    <ToggleButton
+                      value="increaseIdentation"
+                      aria-label="justified"
+                      data-trix-action='increaseNestingLevel'
+                    >
                       <FormatIndentIncreaseIcon />
                     </ToggleButton>
                   </ToggleButtonGroup>
                   <ToggleButtonGroup size="small" >
-                    <ToggleButton value="justify" aria-label="justified" disabled>
+                    <ToggleButton
+                      value="undi"
+                      aria-label="justified"
+                      data-trix-action='undo'
+                    >
                       <UndoIcon />
                     </ToggleButton>
-                    <ToggleButton value="justify" aria-label="justified" disabled>
+                    <ToggleButton
+                      value="justify"
+                      aria-label="justified"
+                      data-trix-action='redo'
+                    >
                       <RedoIcon />
                     </ToggleButton>
                   </ToggleButtonGroup>
@@ -196,7 +204,7 @@ const NotesPage = ({colorMode, setColorMode}) => {
               </trix-toolbar>
             </Box>
             <ReactTrixRTEInput
-                toolbarId="toolbar-editor"
+                toolbarId="trix-toolbar"
                 defaultValue="<div>React Trix Rich Text Editor</div>"
                 onChange={handleChange}
                 className={'text-editor'}
