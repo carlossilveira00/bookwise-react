@@ -1,8 +1,8 @@
-/* .text-editor{
+.text-editor{
   height: 70vh;
-  margin-top: 20px;
+  border-radius: 4px;
 }
 
-.trix-button--icon {
-  background-color: aqua;
-} */
+.text-editor:focus-visible{
+  border: 2px solid #FBA92B;
+}
