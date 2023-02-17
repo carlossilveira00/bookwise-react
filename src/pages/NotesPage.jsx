@@ -1,4 +1,4 @@
-import { Box, Button, ButtonGroup, ToggleButtonGroup } from "@mui/material";
+import { Box, Button, ButtonGroup, TextField, ToggleButtonGroup } from "@mui/material";
 import { Stack } from "@mui/system";
 import { useTheme } from "@emotion/react";
 import SideBar from "../components/SideBar";
@@ -24,16 +24,6 @@ import FormatIndentIncreaseIcon from '@mui/icons-material/FormatIndentIncrease';
 
 import UndoIcon from '@mui/icons-material/Undo';
 import RedoIcon from '@mui/icons-material/Redo';
-
-import FormatAlignLeftIcon from '@mui/icons-material/FormatAlignLeft';
-import FormatAlignCenterIcon from '@mui/icons-material/FormatAlignCenter';
-import FormatAlignRightIcon from '@mui/icons-material/FormatAlignRight';
-import FormatAlignJustifyIcon from '@mui/icons-material/FormatAlignJustify';
-import FormatUnderlinedIcon from '@mui/icons-material/FormatUnderlined';
-import FormatColorFillIcon from '@mui/icons-material/FormatColorFill';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import Divider from '@mui/material/Divider';
-import Paper from '@mui/material/Paper';
 import ToggleButton from '@mui/material/ToggleButton';
 
 
@@ -203,12 +193,16 @@ const NotesPage = ({colorMode, setColorMode}) => {
                 </Box>
               </trix-toolbar>
             </Box>
+            <Box display={'flex'} marginY={3}  >
+              <TextField id="title" defaultValue={'No Title Provided'} name='title' label="Title" placeholder='Give a title to your note' variant="outlined" sx={{width: '50%', marginRight: 10}} />
+              <TextField id="category" name='category' label="Category" placeholder='category' variant="outlined" />
+            </Box>
             <ReactTrixRTEInput
-                toolbarId="trix-toolbar"
-                defaultValue="<div>React Trix Rich Text Editor</div>"
-                onChange={handleChange}
-                className={'text-editor'}
-              />
+              toolbarId="trix-toolbar"
+              defaultValue="<div>React Trix Rich Text Editor</div>"
+              onChange={handleChange}
+              className={'text-editor'}
+            />
           </Box>
         </Box>
 
