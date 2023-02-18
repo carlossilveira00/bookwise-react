@@ -116,7 +116,6 @@ const SideBar = ({setOpen, open, colorMode, setColorMode}) => {
                   <BookIconWithTitle
                     key={filteredBook.id}
                     title={filteredBook.book.title}
-                    description={filteredBook.book.description}
                     id={filteredBook.id}
                   />
                 ))
