@@ -13,8 +13,10 @@ import { useFetchBookNotes } from "../hooks/useNotesData";
 const NotesPage = ({colorMode, setColorMode}) => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
+  const [bookSelected, setBookSelected] = useState();
 
-  const { data, isLoading } = useFetchBookNotes();
+  // Fetch notes for a specific book.
+  // const { data, isLoading } = useFetchBookNotes();
 
   return (
     <>

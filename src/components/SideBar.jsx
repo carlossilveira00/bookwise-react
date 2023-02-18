@@ -1,5 +1,5 @@
 import { useTheme } from '@emotion/react';
-import { AppBar, CssBaseline, Divider, Drawer, List, Toolbar, Typography } from '@mui/material';
+import { AppBar, CssBaseline, Divider, Drawer, List, Toolbar, Typography, Accordion, AccordionDetails, AccordionSummary, CircularProgress } from '@mui/material';
 import { Box } from '@mui/system';
 import MenuIcon from '@mui/icons-material/Menu';
 import ListItem from '@mui/material/ListItem';
@@ -10,17 +10,23 @@ import SearchNotes from './SearchNotes';
 import IconButton from '@mui/material/IconButton';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
-import BooksAccordion from './BooksAccordion';
 import HomeIcon from '@mui/icons-material/Home';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/Auth';
+import React from 'react'
+import BookIconWithTitle from './BookIconWithTitle';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { useFetchUserBooksData } from '../hooks/useUserBookData';
 
 const SideBar = ({setOpen, open, colorMode, setColorMode}) => {
   const theme = useTheme();
   const auth = useAuth();
   const navigate = useNavigate();
+
+  // Fetch all the Books that user has added to library.
+  const {data : userBooks, isLoading} = useFetchUserBooksData();
 
   // Function used to open the drower component.
   const handleDrawerOpen = () => {
@@ -41,6 +47,14 @@ const SideBar = ({setOpen, open, colorMode, setColorMode}) => {
   const handleLogout = () => {
     auth.logout();
     navigate('/', {replace: true})
+  };
+
+  if (isLoading){
+    return(
+      <Box display={'flex'} justifyContent={'center'} alignItems={'center'} height={'100vh'}>
+        <CircularProgress sx={{mx: 'auto'}}></CircularProgress>
+      </Box>
+    )
   };
 
   return (
@@ -88,12 +102,48 @@ const SideBar = ({setOpen, open, colorMode, setColorMode}) => {
           <Typography variant="overline" fontSize={11} color="initial">Books</Typography>
         </Divider>
         <Box mt={2}>
-          <BooksAccordion
-            title={'In Progress'}
-          />
-          <BooksAccordion
-            title={'Completed'}
-          />
+          <Accordion>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1a-content"
+              id="panel1a-header"
+            >
+              <Typography variant="body1" color="initial">In Progress</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              {
+                userBooks.data.filter( book => book.status === 'In Progress').map( filteredBook => (
+                  <BookIconWithTitle
+                    key={filteredBook.id}
+                    title={filteredBook.book.title}
+                    description={filteredBook.book.description}
+                    id={filteredBook.id}
+                  />
+                ))
+              }
+            </AccordionDetails>
+          </Accordion>
+          <Accordion>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1a-content"
+              id="panel1a-header"
+            >
+              <Typography variant="body1" color="initial">Completed</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              {
+                userBooks.data.filter( book => book.status === 'Completed').map( filteredBook => (
+                  <BookIconWithTitle
+                    key={filteredBook.id}
+                    title={filteredBook.book.title}
+                    description={filteredBook.book.description}
+                    id={filteredBook.id}
+                  />
+                ))
+              }
+            </AccordionDetails>
+          </Accordion>
         </Box>
         <Divider textAlign='center' sx={{mt: 2}}>
           <Typography variant="overline" fontSize={11} color="initial">Menu</Typography>
