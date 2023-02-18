@@ -7,11 +7,14 @@ import Note from "../components/Note";
 import ShowNotes from "../components/ShowNotes";
 import TrixToolbar from "../components/TrixToolbar";
 import TrixInput from "../components/TrixInput";
+import { useFetchBookNotes } from "../hooks/useNotesData";
 
 
 const NotesPage = ({colorMode, setColorMode}) => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
+
+  const { data, isLoading } = useFetchBookNotes();
 
   return (
     <>
