@@ -15,12 +15,12 @@ import Brightness4Icon from '@mui/icons-material/Brightness4';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/Auth';
-import React from 'react'
+import React, { useState } from 'react'
 import BookIconWithTitle from './BookIconWithTitle';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useFetchUserBooksData } from '../hooks/useUserBookData';
 
-const SideBar = ({setOpen, open, colorMode, setColorMode}) => {
+const SideBar = ({setOpen, open, colorMode, setColorMode, handleSelectBook}) => {
   const theme = useTheme();
   const auth = useAuth();
   const navigate = useNavigate();
@@ -117,6 +117,7 @@ const SideBar = ({setOpen, open, colorMode, setColorMode}) => {
                     key={filteredBook.id}
                     title={filteredBook.book.title}
                     id={filteredBook.id}
+                    handleSelectBook={handleSelectBook}
                   />
                 ))
               }
@@ -136,8 +137,8 @@ const SideBar = ({setOpen, open, colorMode, setColorMode}) => {
                   <BookIconWithTitle
                     key={filteredBook.id}
                     title={filteredBook.book.title}
-                    description={filteredBook.book.description}
                     id={filteredBook.id}
+                    handleSelectBook={handleSelectBook}
                   />
                 ))
               }
