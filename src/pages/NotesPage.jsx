@@ -2,7 +2,7 @@ import { Box} from "@mui/material";
 import { Stack } from "@mui/system";
 import { useTheme } from "@emotion/react";
 import SideBar from "../components/SideBar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Note from "../components/Note";
 import ShowNotes from "../components/ShowNotes";
 import TrixToolbar from "../components/TrixToolbar";
@@ -13,7 +13,17 @@ import { useFetchBookNotes } from "../hooks/useNotesData";
 const NotesPage = ({colorMode, setColorMode}) => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
-  const [bookSelected, setBookSelected] = useState();
+  const [bookSelected, setBookSelected] = useState(null);
+
+  const handleSelectBook = (id) => {
+    setBookSelected(id);
+  }
+
+  useEffect(()=> {
+    if (bookSelected == null) {
+      console.log('Hello Wolrd')
+    }
+  },[bookSelected])
 
   // Fetch notes for a specific book.
   // const { data, isLoading } = useFetchBookNotes();
@@ -21,7 +31,7 @@ const NotesPage = ({colorMode, setColorMode}) => {
   return (
     <>
     <Stack direction={'row'}>
-      <SideBar open={open} setOpen={setOpen} colorMode={colorMode} setColorMode={setColorMode}/>
+      <SideBar open={open} setOpen={setOpen} colorMode={colorMode} setColorMode={setColorMode} handleSelectBook={handleSelectBook}/>
       <Box open={open}
         sx={{
           flexGrow: 1,

@@ -20,17 +20,10 @@ import BookIconWithTitle from './BookIconWithTitle';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useFetchUserBooksData } from '../hooks/useUserBookData';
 
-const SideBar = ({setOpen, open, colorMode, setColorMode}) => {
-  const [bookSelected, setBookSelected] = useState(null);
+const SideBar = ({setOpen, open, colorMode, setColorMode, handleSelectBook}) => {
   const theme = useTheme();
   const auth = useAuth();
   const navigate = useNavigate();
-
-  console.log(bookSelected)
-
-  const handleSelectBook = (id) => {
-    setBookSelected(id);
-  }
 
   // Fetch all the Books that user has added to library.
   const {data : userBooks, isLoading} = useFetchUserBooksData();
