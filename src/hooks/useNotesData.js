@@ -6,9 +6,10 @@ const fetchBookNotes = ({user_book_id}) => {
 };
 
 const createBookNote = ({user_book_id}) => {
+  axios.defaults.headers.common['Authorization'] = sessionStorage.getItem('userData');
   const user = JSON.parse(sessionStorage.getItem('userData'));
 
-  return axios.post('http://localhost:3000/notes', {user_book: user_book_id, user_id: user.user.id});
+  return axios.post('http://localhost:3000/notes', {user_id: user.user.id, user_book_id: user_book_id });
 };
 
 export const useFetchBookNotes = (onSuccess, onError) => {

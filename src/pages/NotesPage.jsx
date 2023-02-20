@@ -8,14 +8,11 @@ import ShowNotes from "../components/ShowNotes";
 import TrixToolbar from "../components/TrixToolbar";
 import TrixInput from "../components/TrixInput";
 import { useCreateBookNote, useFetchBookNotes } from "../hooks/useNotesData";
-import Fab from '@mui/material/Fab';
-import AddIcon from '@mui/icons-material/Add';
 import { useAuth } from "../context/Auth";
 
 
 const NotesPage = ({colorMode, setColorMode}) => {
   const theme = useTheme();
-  const auth = useAuth();
   const [open, setOpen] = useState(false);
   const [bookSelected, setBookSelected] = useState(null);
 
@@ -23,13 +20,11 @@ const NotesPage = ({colorMode, setColorMode}) => {
   const { data, isLoading, refetch } = useFetchBookNotes();
 
   // Create note for a specific book.
-  const { mutate: createBookNote, data: noteData } = useCreateBookNote();
-
-  console.log(noteData)
+  const { mutate: createBookNote , data: noteData } = useCreateBookNote();
 
   const handleCreateNote = () => {
-    const newNote = {user_id: auth.user.user.id, user_book_id: bookSelected}
-    createBookNote(newNote);
+    createBookNote({user_book_id: bookSelected});
+    refetch();
   };
 
   const handleSelectBook = (id) => {
@@ -40,7 +35,7 @@ const NotesPage = ({colorMode, setColorMode}) => {
     if (bookSelected !== null) {
       refetch();
     }
-  },[bookSelected]);
+  },[bookSelected, refetch]);
 
 
   return (
