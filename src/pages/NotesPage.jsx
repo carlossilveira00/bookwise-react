@@ -1,4 +1,4 @@
-import { Box} from "@mui/material";
+import { Box, Button} from "@mui/material";
 import { Stack } from "@mui/system";
 import { useTheme } from "@emotion/react";
 import SideBar from "../components/SideBar";
@@ -7,16 +7,30 @@ import Note from "../components/Note";
 import ShowNotes from "../components/ShowNotes";
 import TrixToolbar from "../components/TrixToolbar";
 import TrixInput from "../components/TrixInput";
-import { useFetchBookNotes } from "../hooks/useNotesData";
+import { useCreateBookNote, useFetchBookNotes } from "../hooks/useNotesData";
+import Fab from '@mui/material/Fab';
+import AddIcon from '@mui/icons-material/Add';
+import { useAuth } from "../context/Auth";
 
 
 const NotesPage = ({colorMode, setColorMode}) => {
   const theme = useTheme();
+  const auth = useAuth();
   const [open, setOpen] = useState(false);
   const [bookSelected, setBookSelected] = useState(null);
 
   // Fetch notes for a specific book.
   const { data, isLoading, refetch } = useFetchBookNotes();
+
+  // Create note for a specific book.
+  const { mutate: createBookNote, data: noteData } = useCreateBookNote();
+
+  console.log(noteData)
+
+  const handleCreateNote = () => {
+    const newNote = {user_id: auth.user.user.id, user_book_id: bookSelected}
+    createBookNote(newNote);
+  };
 
   const handleSelectBook = (id) => {
     setBookSelected(id);
@@ -56,6 +70,7 @@ const NotesPage = ({colorMode, setColorMode}) => {
             <Note></Note>
             <Note></Note>
             <Note></Note>
+            <Button variant="contained" onClick={handleCreateNote}>Create Note</Button>
           </ShowNotes>
           <Box sx={{border: '1px solid red', height: '100vh', width: 'fill-available', padding: 3}}>
             <TrixToolbar />
