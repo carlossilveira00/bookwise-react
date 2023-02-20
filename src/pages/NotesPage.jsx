@@ -1,4 +1,4 @@
-import { Box} from "@mui/material";
+import { Box, Button} from "@mui/material";
 import { Stack } from "@mui/system";
 import { useTheme } from "@emotion/react";
 import SideBar from "../components/SideBar";
@@ -7,26 +7,45 @@ import Note from "../components/Note";
 import ShowNotes from "../components/ShowNotes";
 import TrixToolbar from "../components/TrixToolbar";
 import TrixInput from "../components/TrixInput";
-import { useFetchBookNotes } from "../hooks/useNotesData";
+import { useCreateBookNote, useFetchBookNotes } from "../hooks/useNotesData";
+import { useAuth } from "../context/Auth";
 
 
 const NotesPage = ({colorMode, setColorMode}) => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
   const [bookSelected, setBookSelected] = useState(null);
+  const [notes,setNotes] = useState([]);
+
+  const onSuccess = () => {
+    console.log("I was able to fetch the notes for the book.")
+  };
+
+  const onError = () => {
+    console.log('I failed fetch the notes for the book.')
+  };
+
+  // Fetch notes for a specific book.
+  const { data, isLoading, refetch } = useFetchBookNotes(bookSelected, onSuccess, onError);
+
+  // Create note for a specific book.
+  const { mutate: createBookNote } = useCreateBookNote();
+
+  const handleCreateNote = () => {
+    createBookNote({user_book_id: bookSelected});
+    refetch();
+  };
 
   const handleSelectBook = (id) => {
     setBookSelected(id);
-  }
+  };
 
   useEffect(()=> {
-    if (bookSelected == null) {
-      console.log('Hello Wolrd')
+    if (bookSelected !== null ) {
+      refetch();
     }
-  },[bookSelected])
+  },[bookSelected, refetch]);
 
-  // Fetch notes for a specific book.
-  // const { data, isLoading } = useFetchBookNotes();
 
   return (
     <>
@@ -55,6 +74,7 @@ const NotesPage = ({colorMode, setColorMode}) => {
             <Note></Note>
             <Note></Note>
             <Note></Note>
+            <Button variant="contained" onClick={handleCreateNote}>Create Note</Button>
           </ShowNotes>
           <Box sx={{border: '1px solid red', height: '100vh', width: 'fill-available', padding: 3}}>
             <TrixToolbar />
