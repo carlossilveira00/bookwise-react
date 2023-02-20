@@ -15,12 +15,21 @@ const NotesPage = ({colorMode, setColorMode}) => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
   const [bookSelected, setBookSelected] = useState(null);
+  const [notes,setNotes] = useState([]);
+
+  const onSuccess = () => {
+    console.log("I was able to fetch the notes for the book.")
+  };
+
+  const onError = () => {
+    console.log('I failed fetch the notes for the book.')
+  };
 
   // Fetch notes for a specific book.
-  const { data, isLoading, refetch } = useFetchBookNotes();
+  const { data, isLoading, refetch } = useFetchBookNotes(bookSelected, onSuccess, onError);
 
   // Create note for a specific book.
-  const { mutate: createBookNote , data: noteData } = useCreateBookNote();
+  const { mutate: createBookNote } = useCreateBookNote();
 
   const handleCreateNote = () => {
     createBookNote({user_book_id: bookSelected});
@@ -29,10 +38,10 @@ const NotesPage = ({colorMode, setColorMode}) => {
 
   const handleSelectBook = (id) => {
     setBookSelected(id);
-  }
+  };
 
   useEffect(()=> {
-    if (bookSelected !== null) {
+    if (bookSelected !== null ) {
       refetch();
     }
   },[bookSelected, refetch]);

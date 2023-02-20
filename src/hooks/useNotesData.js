@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useMutation, useQuery } from "react-query";
 
-const fetchBookNotes = ({user_book_id}) => {
+const fetchBookNotes = user_book_id => {
   return axios.get(`http://localhost:3000/book_notes/${user_book_id}`)
 };
 
@@ -12,11 +12,12 @@ const createBookNote = ({user_book_id}) => {
   return axios.post('http://localhost:3000/notes', {user_id: user.user.id, user_book_id: user_book_id });
 };
 
-export const useFetchBookNotes = (onSuccess, onError) => {
-  return useQuery('book_notes', fetchBookNotes, {
+export const useFetchBookNotes = (user_book_id, onSuccess, onError) => {
+  return useQuery(['book_notes', user_book_id], () => fetchBookNotes(user_book_id), {
     onSuccess,
     onError,
-  })
+    enabled: false
+  } )
 };
 
 export const useCreateBookNote = () => {
