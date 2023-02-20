@@ -15,18 +15,19 @@ const NotesPage = ({colorMode, setColorMode}) => {
   const [open, setOpen] = useState(false);
   const [bookSelected, setBookSelected] = useState(null);
 
+  // Fetch notes for a specific book.
+  const { data, isLoading, refetch } = useFetchBookNotes();
+
   const handleSelectBook = (id) => {
     setBookSelected(id);
   }
 
   useEffect(()=> {
-    if (bookSelected == null) {
-      console.log('Hello Wolrd')
+    if (bookSelected !== null) {
+      refetch();
     }
-  },[bookSelected])
+  },[bookSelected]);
 
-  // Fetch notes for a specific book.
-  // const { data, isLoading } = useFetchBookNotes();
 
   return (
     <>
