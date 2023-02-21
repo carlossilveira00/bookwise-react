@@ -26,13 +26,13 @@ const NotesPage = ({colorMode, setColorMode}) => {
   };
 
   // Fetch notes for a specific book.
-  const { data, isLoading, refetch } = useFetchBookNotes(bookSelected, onSuccess, onError);
+  const { data: bookNotes , isLoading, refetch } = useFetchBookNotes(bookSelected, onSuccess, onError);
 
   // Create note for a specific book.
   const { mutate: createBookNote } = useCreateBookNote();
 
   const handleCreateNote = () => {
-    createBookNote({user_book_id: bookSelected});
+    createBookNote({user_book_id: bookSelected})
     refetch();
   };
 
@@ -42,7 +42,8 @@ const NotesPage = ({colorMode, setColorMode}) => {
 
   useEffect(()=> {
     if (bookSelected !== null ) {
-      refetch();
+      refetch()
+      .then(request => setNotes(request.data.data))
     }
   },[bookSelected, refetch]);
 
