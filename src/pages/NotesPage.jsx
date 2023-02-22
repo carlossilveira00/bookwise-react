@@ -8,7 +8,6 @@ import ShowNotes from "../components/ShowNotes";
 import TrixToolbar from "../components/TrixToolbar";
 import TrixInput from "../components/TrixInput";
 import { useCreateBookNote, useFetchBookNotes } from "../hooks/useNotesData";
-import { useAuth } from "../context/Auth";
 
 
 const NotesPage = ({colorMode, setColorMode}) => {
@@ -17,16 +16,10 @@ const NotesPage = ({colorMode, setColorMode}) => {
   const [bookSelected, setBookSelected] = useState(null);
   const [notes,setNotes] = useState([]);
 
-  const onSuccess = () => {
-    console.log("I was able to fetch the notes for the book.")
-  };
-
-  const onError = () => {
-    console.log('I failed fetch the notes for the book.')
-  };
+  console.log(notes)
 
   // Fetch notes for a specific book.
-  const { data: bookNotes , isLoading, refetch } = useFetchBookNotes(bookSelected, onSuccess, onError);
+  const { refetch } = useFetchBookNotes(bookSelected);
 
   // Create note for a specific book.
   const { mutate: createBookNote } = useCreateBookNote();
@@ -72,10 +65,14 @@ const NotesPage = ({colorMode, setColorMode}) => {
       >
         <Box display={'flex'}>
           <ShowNotes>
-            <Note></Note>
-            <Note></Note>
-            <Note></Note>
-            <Button variant="contained" onClick={handleCreateNote}>Create Note</Button>
+            {notes.map(note =>
+              <Note
+                key={note.id}
+                title={note.title}
+                body={note.body}
+              />
+            )}
+            <Button variant="contained" disabled={!bookSelected && true} onClick={handleCreateNote}>Create Note</Button>
           </ShowNotes>
           <Box sx={{border: '1px solid red', height: '100vh', width: 'fill-available', padding: 3}}>
             <TrixToolbar />
