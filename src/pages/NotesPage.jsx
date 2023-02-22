@@ -8,38 +8,37 @@ import ShowNotes from "../components/ShowNotes";
 import TrixToolbar from "../components/TrixToolbar";
 import TrixInput from "../components/TrixInput";
 import { useCreateBookNote, useFetchBookNotes } from "../hooks/useNotesData";
-import { useAuth } from "../context/Auth";
 
 
 const NotesPage = ({colorMode, setColorMode}) => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
   const [bookSelected, setBookSelected] = useState(null);
+  const [noteSelected, setNoteSelected] = useState(null)
   const [notes,setNotes] = useState([]);
 
-  const onSuccess = () => {
-    console.log("I was able to fetch the notes for the book.")
-  };
-
-  const onError = () => {
-    console.log('I failed fetch the notes for the book.')
-  };
-
   // Fetch notes for a specific book.
-  const { data: bookNotes , isLoading, refetch } = useFetchBookNotes(bookSelected, onSuccess, onError);
+  const { refetch } = useFetchBookNotes(bookSelected);
 
   // Create note for a specific book.
   const { mutate: createBookNote } = useCreateBookNote();
 
+  // Creates an default note for the specific book selected and then refetches the notes in order to update the notes state.
   const handleCreateNote = () => {
     createBookNote({user_book_id: bookSelected})
     refetch();
   };
 
+  // Function to set the book selected in order to be able to request the notes of a specific book.
   const handleSelectBook = (id) => {
     setBookSelected(id);
   };
 
+  const handleSelectNote = (id) => {
+    setNoteSelected(id);
+  };
+
+  // Send GET request for the book notes only if the bookSelected isn't null and then setNotes to the response received from the request.
   useEffect(()=> {
     if (bookSelected !== null ) {
       refetch()
@@ -72,14 +71,20 @@ const NotesPage = ({colorMode, setColorMode}) => {
       >
         <Box display={'flex'}>
           <ShowNotes>
-            <Note></Note>
-            <Note></Note>
-            <Note></Note>
-            <Button variant="contained" onClick={handleCreateNote}>Create Note</Button>
+            {notes.map(note =>
+              <Note
+                key={note.id}
+                id={note.id}
+                title={note.title}
+                body={note.body}
+                handleSelectNote={handleSelectNote}
+              />
+            )}
+            <Button variant="contained" disabled={!bookSelected && true} onClick={handleCreateNote}>Create Note</Button>
           </ShowNotes>
           <Box sx={{border: '1px solid red', height: '100vh', width: 'fill-available', padding: 3}}>
             <TrixToolbar />
-            <TrixInput />
+            <TrixInput note={noteSelected}/>
           </Box>
         </Box>
       </Box>
