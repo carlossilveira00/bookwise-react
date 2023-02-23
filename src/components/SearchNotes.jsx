@@ -25,10 +25,10 @@ const SearchNotes = ({handleSearchQuery}) => {
       <Box sx={{mx: 'auto', width: '50%', marginTop: 3, marginBottom: 2}}>
         <FormControl fullWidth size="small" >
           <InputLabel>Search By: </InputLabel>
-          <Select label='search by'>
-            <MenuItem value={10}>Title</MenuItem>
-            <MenuItem value={10}>Category</MenuItem>
-            <MenuItem value={10}>None</MenuItem>
+          <Select label='search by' defaultValue={'default'}>
+            <MenuItem value={'default'}>None</MenuItem>
+            <MenuItem value={'title'}>Title</MenuItem>
+            <MenuItem value={'category'}>Category</MenuItem>
           </Select>
         </FormControl>
       </Box>
