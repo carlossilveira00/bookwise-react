@@ -1,8 +1,6 @@
 import { TextField } from '@mui/material'
 import { Box } from '@mui/system'
-import { useState } from 'react';
 import { ReactTrixRTEInput} from "react-trix-rte";
-import Trix from "trix";
 
 
 const TrixInput = ({handleChange, note}) => {
