@@ -5,17 +5,18 @@ import { ReactTrixRTEInput} from "react-trix-rte";
 
 const TrixInput = ({handleChange, note}) => {
 
+
   return (
-    <Box>
+    <Box key={note == null ? null : note}>
       <Box display={'flex'} marginY={3}  >
         <TextField id="title" defaultValue={'No Title Provided'} name='title' label="Title" placeholder='Give a title to your note' variant="outlined" sx={{width: '50%', marginRight: 10}} />
         <TextField id="category" name='category' label="Category" placeholder='category' variant="outlined" />
       </Box>
       <ReactTrixRTEInput
-        name='x'
+        id='editor'
         toolbarId="trix-toolbar"
-        defaultValue={`Hello World`}
-        onChange={() => console.log('Trix Fired')}
+        defaultValue={note}
+        onChange={(e) => console.log('Trix Editor Fired')}
         className={'text-editor'}
       />
     </Box>
