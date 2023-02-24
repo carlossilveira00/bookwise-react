@@ -1,13 +1,13 @@
 import { TextField } from '@mui/material'
 import { Box } from '@mui/system'
-import { useEffect, useState } from 'react';
 import { ReactTrixRTEInput} from "react-trix-rte";
 
 
 const TrixInput = ({handleChange, note}) => {
 
+
   return (
-    <Box>
+    <Box key={note == null ? null : note}>
       <Box display={'flex'} marginY={3}  >
         <TextField id="title" defaultValue={'No Title Provided'} name='title' label="Title" placeholder='Give a title to your note' variant="outlined" sx={{width: '50%', marginRight: 10}} />
         <TextField id="category" name='category' label="Category" placeholder='category' variant="outlined" />
@@ -15,7 +15,7 @@ const TrixInput = ({handleChange, note}) => {
       <ReactTrixRTEInput
         id='editor'
         toolbarId="trix-toolbar"
-        defaultValue={`Hello World`}
+        defaultValue={note}
         onChange={(e) => console.log('Trix Editor Fired')}
         className={'text-editor'}
       />
