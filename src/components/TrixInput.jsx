@@ -1,5 +1,6 @@
 import { TextField } from '@mui/material'
 import { Box } from '@mui/system'
+import { useEffect, useState } from 'react';
 import { ReactTrixRTEInput} from "react-trix-rte";
 
 
@@ -12,10 +13,10 @@ const TrixInput = ({handleChange, note}) => {
         <TextField id="category" name='category' label="Category" placeholder='category' variant="outlined" />
       </Box>
       <ReactTrixRTEInput
-        name='x'
+        id='editor'
         toolbarId="trix-toolbar"
         defaultValue={`Hello World`}
-        onChange={() => console.log('Trix Fired')}
+        onChange={(e) => console.log('Trix Editor Fired')}
         className={'text-editor'}
       />
     </Box>

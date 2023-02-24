@@ -14,7 +14,7 @@ const NotesPage = ({colorMode, setColorMode}) => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
   const [bookSelected, setBookSelected] = useState(null);
-  const [noteSelected, setNoteSelected] = useState(null)
+  const [noteSelected, setNoteSelected] = useState(null);
   const [notes,setNotes] = useState([]);
 
   // Fetch notes for a specific book.
