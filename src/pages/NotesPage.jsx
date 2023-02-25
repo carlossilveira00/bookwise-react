@@ -35,7 +35,8 @@ const NotesPage = ({colorMode, setColorMode}) => {
   };
 
   const handleSelectNote = (id) => {
-    setNoteSelected(id);
+    // Filter the notes array to find the right note and assign it to the note Selected.
+    setNoteSelected(notes.find(note => note.id === id));
   };
 
   // Send GET request for the book notes only if the bookSelected isn't null and then setNotes to the response received from the request.
