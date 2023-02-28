@@ -15,7 +15,6 @@ import Brightness4Icon from '@mui/icons-material/Brightness4';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/Auth';
-import React, { useState } from 'react'
 import BookIconWithTitle from './BookIconWithTitle';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useFetchUserBooksData } from '../hooks/useUserBookData';
