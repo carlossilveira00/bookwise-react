@@ -1,6 +1,5 @@
 import { Box, ToggleButtonGroup } from "@mui/material";
 import { useState } from "react";
-import Trix from "trix";
 
 // Icons for the toolbar.
 import FormatBoldIcon from '@mui/icons-material/FormatBold';

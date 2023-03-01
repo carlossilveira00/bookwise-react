@@ -1,6 +1,5 @@
 import { Box } from '@mui/system';
-import React from 'react'
-import Typography from '@mui/material/Typography'
+import Typography from '@mui/material/Typography';
 
 const ShowNotes = ({children}) => {
   return (
