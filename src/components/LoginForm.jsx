@@ -1,4 +1,3 @@
-import React from 'react'
 import { FormGroup, Stack, TextField, Typography, FormControlLabel, Checkbox, Button, Card } from '@mui/material';
 
 const LoginForm = ({ handleChange, handleSubmit }) => {

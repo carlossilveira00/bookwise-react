@@ -1,7 +1,6 @@
 import { FormControl, InputBase, InputLabel, Paper, Select, MenuItem, Button, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import SearchIcon from '@mui/icons-material/Search';
-import React from 'react'
 
 const SearchNotes = ({handleSearchQuery}) => {
   return (
