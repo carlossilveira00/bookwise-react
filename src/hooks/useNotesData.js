@@ -12,11 +12,17 @@ const createBookNote = ({user_book_id}) => {
   return axios.post('http://localhost:3000/notes', {user_id: user.user.id, user_book_id: user_book_id });
 };
 
-const updateBookNote = ({user_book}) => {
+const updateBookNote = ({note}) => {
   axios.defaults.headers.common['Authorization'] = sessionStorage.getItem('userData');
 
-  return axios.post('http://localhost:3000/notes', {user_book});
-}
+  return axios.post('http://localhost:3000/notes', {note});
+};
+
+const deleteBookNote = ({note_id}) => {
+  axios.defaults.headers.common['Authorization'] = sessionStorage.getItem('userData');
+
+  return axios.delete(`http://localhost:3000/notes${note_id}`)
+};
 
 export const useFetchBookNotes = (user_book_id) => {
   return useQuery(['book_notes', user_book_id], () => fetchBookNotes(user_book_id), {
