@@ -36,4 +36,8 @@ export const useCreateBookNote = () => {
 
 export const useUpdateBookNote = () => {
   return useMutation(updateBookNote);
-}
+};
+
+export const useDeleteBookNote = (note_id) => {
+  return useMutation(note_id)
+};
