@@ -18,9 +18,10 @@ import FormatIndentIncreaseIcon from '@mui/icons-material/FormatIndentIncrease';
 import UndoIcon from '@mui/icons-material/Undo';
 import RedoIcon from '@mui/icons-material/Redo';
 import ToggleButton from '@mui/material/ToggleButton';
+import SaveAltIcon from '@mui/icons-material/SaveAlt';
 
 
-const TrixToolbar = () => {
+const TrixToolbar = ({handleNoteSave}) => {
   const [alignment, setAlignment] = useState('left');
   const [formats, setFormats] = useState(() => []);
   const handleFormat = (event, newFormats) => {
@@ -129,6 +130,15 @@ const TrixToolbar = () => {
               data-trix-action='increaseNestingLevel'
             >
               <FormatIndentIncreaseIcon />
+            </ToggleButton>
+          </ToggleButtonGroup>
+          <ToggleButtonGroup size="small" >
+            <ToggleButton
+              value="save"
+              aria-label="save"
+              onClick={handleNoteSave}
+            >
+              <SaveAltIcon />
             </ToggleButton>
           </ToggleButtonGroup>
           <ToggleButtonGroup size="small" >
