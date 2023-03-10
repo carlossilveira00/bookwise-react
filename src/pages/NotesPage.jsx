@@ -7,7 +7,7 @@ import Note from "../components/Note";
 import ShowNotes from "../components/ShowNotes";
 import TrixToolbar from "../components/TrixToolbar";
 import TrixInput from "../components/TrixInput";
-import { useCreateBookNote, useFetchBookNotes } from "../hooks/useNotesData";
+import { useCreateBookNote, useFetchBookNotes, useUpdateBookNote } from "../hooks/useNotesData";
 
 
 const NotesPage = ({colorMode, setColorMode}) => {
@@ -23,6 +23,8 @@ const NotesPage = ({colorMode, setColorMode}) => {
   // Create note for a specific book.
   const { mutate: createBookNote } = useCreateBookNote();
 
+  // Save note.
+  const {mutate: saveNote } = useUpdateBookNote();
   // Creates an default note for the specific book selected and then refetches the notes in order to update the notes state.
   const handleCreateNote = () => {
     createBookNote({user_book_id: bookSelected})
@@ -38,6 +40,10 @@ const NotesPage = ({colorMode, setColorMode}) => {
     // Filter the notes array to find the right note and assign it to the note Selected.
     setNoteSelected(notes.find(note => note.id === id));
   };
+
+  const handleNoteSave = (note) => {
+    saveNote(note);
+  }
 
   // Send GET request for the book notes only if the bookSelected isn't null and then setNotes to the response received from the request.
   useEffect(()=> {
@@ -84,7 +90,7 @@ const NotesPage = ({colorMode, setColorMode}) => {
             <Button variant="contained" disabled={!bookSelected && true} onClick={handleCreateNote}>Create Note</Button>
           </ShowNotes>
           <Box sx={{border: '1px solid red', height: '100vh', width: 'fill-available', padding: 3}}>
-            <TrixToolbar />
+            <TrixToolbar handleNoteSave={handleNoteSave} />
             <TrixInput note={noteSelected}/>
           </Box>
         </Box>
